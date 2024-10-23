@@ -1,0 +1,28 @@
+
+
+// Otros estilos para el botón
+.next-button {
+  // Estilos para el botón activado
+  background-color: #a54c2c; // Color verde (cámbialo según tus preferencias)
+  color: #fff; // Texto en color blanco
+  // Otros estilos...
+
+  &:hover {
+    background-color: #a54c2c; // Color verde oscuro en el hover
+    // Otros estilos para el hover...
+  }
+
+  &:disabled {
+    background-color: #ddd; // Color gris cuando está desactivado
+    color: #666; // Texto en color gris oscuro
+    cursor: not-allowed; // Cambia el cursor a "no permitido"
+    // Otros estilos para el estado desactivado...
+  }
+}
+
+
+mat-icon
+{
+  margin: 0;
+  margin-bottom: 0;
+}

@@ -1,0 +1,64 @@
+
+.floating-button {
+  margin: auto;
+  z-index: 1000;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff5733;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease, width 0.5s ease, height 0.5s ease;
+
+  &.chat-opened {
+    bottom: 130px;
+    display: none;
+  }
+}
+
+@keyframes attention {
+  0% {
+    // transform: translateY(0);
+
+  }
+  100% {
+    // border-style: double;
+    border:  10px  double #ef0707;
+    // box-shadow: 0 2px 12px rgb(255, 242, 0);
+    box-shadow: 0px 9px 50px 2px  rgb(255, 136, 0);
+    transform: translateY(-10px);
+  }
+}
+
+/* Establece los estilos para el estado attention */
+.floating-button {
+  animation: attention 1.2s infinite alternate;
+}
+
+// .user-message {
+//   width: 80%;
+//   background-color: #ffc72c;
+//   color: #333;
+//   padding: 10px;
+//   border-radius: 10px;
+//   margin-bottom: 5px;
+//   text-align: left; /* Alinea el texto a la izquierda */
+// }
+
+// .assistant-message {
+//   width: 80%;
+//   background-color: #f75846;
+//   color: #fff;
+//   padding: 10px;
+//   border-radius: 10px;
+//   margin-bottom: 5px;
+//   text-align: right; /* Alinea el texto a la derecha */
+// }

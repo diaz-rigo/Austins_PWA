@@ -1,0 +1,69 @@
+<div class="full-width-container">
+  <div *ngIf="user" class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header p-card p-shadow-3 p-mb-3">
+      <div class="profile-picture-container">
+        <img [src]="user.profilePhoto ? user.profilePhoto : 'defaultImg'"
+             alt="Profile Picture" class="profile-picture">
+                   <!-- Indicador de estado -->
+        <span [ngClass]="{'online': true, 'offline': !user}" class="online-indicator"
+        aria-label="Usuario en línea"></span>
+        <!-- Input de tipo file con control de visibilidad -->
+        <input type="file" (change)="canEditProfile() ? onFileSelected($event) : null" accept="image/*" id="fileInput" class="hidden">
+        <label for="fileInput" [class.hidden]="!canEditProfile()" class="file-input-label">
+          <i class="pi pi-camera"></i> Cambiar Foto
+        </label>
+
+        <!-- Mensaje de edición -->
+        <div class="edit-info-container">
+          <span *ngIf="canEditProfile()" class="edit-info">Puedes editar la foto de perfil.</span>
+          <span *ngIf="!canEditProfile()" class="edit-info">No puedes editar la foto de perfil hasta dentro de {{ 60 - getDaysSinceLastUpdate() }} días.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Más detalles de la cuenta -->
+    <div class="account-details p-card p-shadow-3">
+      <h3>Más detalles de la cuenta</h3>
+      <ul>
+        <li><strong>Nombre:</strong> {{ user.name }} {{ user.paternalLastname }} {{ user.maternalLastname }}</li>
+        <li><strong>Email:</strong> {{ user.email }}</li>
+        <li><strong>Teléfono:</strong> {{ user.phone }}</li>
+        <li><strong>Dirección:</strong> {{ user.address }}, {{ user.city }}, {{ user.country }}</li>
+        <li><strong>Código Postal:</strong> {{ user.postalCode }}</li>
+      </ul>
+    </div>
+
+    <!-- Inputs para los campos faltantes -->
+    <div class="edit-fields p-card p-shadow-3 p-mt-3">
+      <h3>Actualizar Información del Usuario</h3>
+      <form (ngSubmit)="updateUserData()">
+        <div class="p-field p-grid">
+          <label class="p-col-12 p-md-2" for="postalCode">Código Postal</label>
+          <div class="p-col-12 p-md-10">
+            <input id="postalCode" type="text" pInputText [(ngModel)]="user.postalCode" name="postalCode">
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label class="p-col-12 p-md-2" for="securityQuestion">Pregunta de Seguridad</label>
+          <div class="p-col-12 p-md-10">
+            <input id="securityQuestion" type="text" pInputText [(ngModel)]="user.securityQuestion" name="securityQuestion">
+          </div>
+        </div>
+        <div class="p-field p-grid">
+          <label class="p-col-12 p-md-2" for="securityAnswer">Respuesta de Seguridad</label>
+          <div class="p-col-12 p-md-10">
+            <input id="securityAnswer" type="text" pInputText [(ngModel)]="user.securityAnswer" name="securityAnswer">
+          </div>
+        </div>
+        <!-- Agrega más campos según sea necesario -->
+        <button type="submit" pButton label="Actualizar" [disabled]="!canEditProfile()"></button>
+      </form>
+    </div>
+  </div>
+
+  <div *ngIf="!user" class="loading-indicator">
+    <p>Cargando datos del usuario...</p>
+  </div>
+</div>

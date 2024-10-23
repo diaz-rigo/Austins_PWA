@@ -1,0 +1,87 @@
+.mat-icon {
+  font-size: 20px; /* Ajusta el tamaño de los íconos según tus preferencias */
+  margin-left: 5px; /* Ajusta el margen izquierdo entre el texto y el ícono */
+  vertical-align: middle; /* Centra verticalmente el ícono junto al texto */
+  color: #ffd500; /* Cambia el color de los íconos según tus preferencias */
+}
+
+.privacy-policy-container {
+  background-color: rgba(101, 101, 101, 0.5);
+  position: fixed;
+  bottom: 15px;
+  right: 180px;
+  padding: 10px 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(23px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.privacy-content {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  transition: color 0.3s; /* Agrega una transición suave para el cambio de color */
+}
+
+.privacy-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.privacy-policy-container:hover .privacy-content {
+  /* color: #000; Cambia el color del texto cuando el contenedor padre se encuentra en estado de :hover (sobre fondo blanco) */
+}
+
+.privacy-button {
+  /* text-decoration: underline; */
+}
+
+.privacy-button:hover,
+.close-button:hover {
+  text-decoration: underline;
+  /* color: #000; */
+  /* background-color: #ffd500; */
+}
+
+.close-button {
+  font-style: normal;
+  font-weight: 900;
+}
+
+.privacy-button,
+.close-button {
+  background-color: #007bff00;
+  border: none;
+  color: #ffd500;
+  /* border-radius: 2px; */
+  padding: 10px 30px;
+  /* font-weight: lighter; */
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .privacy-policy-container {
+    bottom: 10px;
+    right: 10px;
+    padding: 5px;
+  }
+
+  .privacy-button,
+  .close-button {
+    padding: 8px 16px;
+    font-weight: normal;
+  }
+}
+
+.icon1 {
+  margin: 0;
+  margin-bottom: 0;
+}

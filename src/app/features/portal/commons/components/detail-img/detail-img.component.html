@@ -1,0 +1,17 @@
+<div class="content">
+  <div class="slider-wrapper">
+
+    <div #slider class="slider">
+      <ng-container *ngFor="let item of images">
+        <img [src]="getImages(item)" alt="" (click)="toogleImg(item)" />
+      </ng-container>
+    </div>
+  </div>
+  <div class="main-img">
+    <div class="image-zoom-container">
+      <div class="zoomed-image">
+        <img [src]="srcMain" alt="" id="zoomed-img"  />
+      </div>
+    </div>
+  </div>
+</div>

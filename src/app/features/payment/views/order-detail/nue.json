@@ -1,0 +1,25 @@
+{
+  "totalneto": "250.00",
+  "tipoEntrega": "En tienda",
+  "dateselect": "2024-08-29T05:39:23.000Z",
+  "productos": [
+    {
+      "id": "66916c9262dd33a391dd2648",
+      "name": "Straciateli y Naranja-",
+      "precio": 250,
+      "cantidad": 1,
+      "image": [
+        "https://res.cloudinary.com/dfd0b4jhf/image/upload/v1720806549/PastelFinos/66916c9262dd33a391dd2648/Captura%20de%20pantalla%202024-07-12%20114448.png"
+      ]
+    }
+  ],
+  "datoscliente": {
+    "name": "rigoberto",
+    "maternalLastname": "Hernandez ",
+    "paternalLastname": "diaz",
+    "phone": "7711512740",
+    "email": "r3152332@gmail.com"
+  },
+  "instrucion": "",
+  "success_url": "https://austins.vercel.app/payment/order-success"
+}

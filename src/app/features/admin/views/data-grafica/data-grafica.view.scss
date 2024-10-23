@@ -1,0 +1,110 @@
+// Variables
+$color-primary: #ff0880; // Naranja
+$color-secondary: #ff8686; // Arena
+$color-background: #ffffff; // Blanco almendra
+
+// Estructura
+.container {
+  margin-top: 80px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: $color-background;
+  padding: 20px;
+  border: 1px solid $color-secondary;
+  border-radius: 5px;
+
+  .chart-container {
+    flex: 1;
+  }
+
+  .card {
+    margin-top: 20px;
+    padding: 20px;
+    // border-style: dotted;
+    border: 3px dotted $color-secondary;
+    border-radius: 5px;
+    background-color: #ffffff;
+  }
+
+  .category-selector,
+  .date-selector,
+  .prediction-result {
+    margin-top: 20px;
+  }
+
+  // Personalización
+  .icon-category-selector .pi {
+    color: $color-primary;
+  }
+
+  // Si necesitas agregar un logo
+  .logo {
+    width: 100px;
+    height: auto;
+    margin: 20px;
+  }
+
+  .row {
+    display: flex;
+    margin-top: 20px;
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      margin-left: 10px;
+      width: 40%;
+      input[type="text"],
+      input[type="time"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="date"] {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-top: 5px;
+      }
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.full-width {
+  width: 100%;
+}
+input[type="text"],
+input[type="time"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+.infiou {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  max-width: 12;
+}
+
+label {
+  font-weight: bold;
+}
+b,
+.p-divide,
+.lab {
+  color: #ffa500; /* Color del texto */
+  // font-weight: bold;
+}
+
+.bel {
+  font-size: 0.9rem;
+  // color: #ffa500;
+}

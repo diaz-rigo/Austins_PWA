@@ -1,0 +1,110 @@
+<div class="content">
+  <!-- <p-splitter [style]="{ height: '300px' }" styleClass="mb-5" layout="vertical">
+    <ng-template pTemplate> -->
+
+  <div class="card flex justify-content-center">
+    <p-card header="{{ productDetail?.name }}">
+      <!-- <h1 style="text-align: center">{{ productDetail?.name }}</h1> -->
+      <p class="price">Precio: {{ productDetail?.price | currency : "" }}</p>
+      <p class="description">
+        <strong>Descripción:</strong> <br />
+        {{ productDetail?.description }}
+      </p>
+      <p class="availability">
+        <span class="quantity">{{
+          productDetail?.quantity ? "Hay existencias" : "Agotado"
+        }}</span>
+      </p>
+      <form [formGroup]="formGroup">
+        <div class="input-button-container">
+          <div class="flex-wrap gap-3 p-fluid">
+            <label style="text-align: center" class="font-bold" for="Cantidad"
+              >Cantidad</label
+            >
+            <div class="flex-auto">
+              <!-- <h2>Cantidad</h2> -->
+
+              <p-inputNumber
+                formControlName="quantity"
+                [(ngModel)]="value1"
+                mode="decimal"
+                [showButtons]="true"
+                inputId="minmax-buttons"
+                [min]="0"
+                [max]="10"
+                [style]="{ height: 'auto' }"
+              >
+              </p-inputNumber>
+
+              <button
+                [disabled]="value1 == 0"
+                class="btn"
+                type="button"
+                (click)="addItem()"
+              >
+                Añadir al carrito
+              </button>
+
+              <button class="btn" type="button" (click)="redirectTo('home')">
+                Regresar
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </p-card>
+  </div>
+  <!-- <div class="col flex align-items-center justify-content-center">
+        <h1 style="text-align: center">{{ productDetail?.name }}</h1>
+        <p class="price">Precio: {{ productDetail?.price | currency : "" }}</p>
+        <p class="description">
+          <strong>Descripción:</strong> <br />
+          {{ productDetail?.description }}
+        </p>
+        <p class="availability">
+          <span class="quantity">{{
+            productDetail?.quantity ? "Hay existencias" : "Agotado"
+          }}</span>
+        </p>
+      </div> -->
+
+  <!-- <div class="col flex align-items-center justify-content-center"> -->
+  <!-- </div> -->
+  <!-- </ng-template> -->
+  <!-- </p-splitter> -->
+
+  <div class="product-details">
+    <div class="card">
+      <div class="card flex justify-content-center">
+        <p-card header="Detalles">
+          <!-- <h2 style="text-align: center">Detalles</h2> -->
+
+          <p><strong>Peso:</strong> {{ productDetail?.weight }} gr</p>
+        </p-card>
+      </div>
+
+      <p-splitter [style]="{ height: 'auto' }" styleClass="mb-5">
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">
+            <p><strong>Ingredientes:</strong></p>
+            <ul>
+              <li *ngFor="let ingredient of productDetail?.ingredients">
+                {{ ingredient }}
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+        <ng-template pTemplate>
+          <div class="col flex align-items-center justify-content-center">
+            <p><strong>alergenos:</strong></p>
+            <ul>
+              <li *ngFor="let alergeno of productDetail?.allergens">
+                {{ alergeno }}
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </p-splitter>
+    </div>
+  </div>
+</div>

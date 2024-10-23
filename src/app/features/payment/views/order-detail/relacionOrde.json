@@ -1,0 +1,164 @@
+23:49:13.479
+  {
+    _id: '66b2e4a536b2d4a043736f5f',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b2e4a436b2d4a043736f5c',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '65e8244b8811e29da1794ff0',
+            quantity: 1,
+            _id: '66b2e4a436b2d4a043736f5d',
+            details: {
+              _id: '65e8244b8811e29da1794ff0',
+              sku: 'sds',
+              name: 'Cupcakes de Vainilla',
+              description:
+                ' Delicados cupcakes de vainilla decorados con crema de vainilla y chispas de colores.',
+              unit: 'sñldk',
+              expiration: 'lkjdlakj',
+              model: 'slkdj',
+              quantity: '92',
+              price: 230,
+              category: 'PastelCelebracion',
+              maker: 'sk',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712483/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_95296d1126d240abbe01f2949c623ddf%7Emv2.webp'
+              ],
+              status: 'ACTIVE',
+              weight: 12,
+              ingredients: [ 'djkls' ],
+              allergens: [ 'dsm' ],
+              nutritionalInformation: 'ds,.m',
+              isFeatured: true,
+              isVegetarian: false,
+              isGlutenFree: false,
+              createdAt: '2024-03-06T08:07:39.037Z'
+            }
+          }
+        ],
+        totalAmount: 230,
+        status: 'PENDING',
+        createdAt: '2024-08-07T03:06:12.962Z'
+      }
+    ],
+    totalAmount: 230,
+    stripeSessionID: null,
+    trackingNumber: '9M61RH',
+    createdAt: '2024-08-07T03:06:13.051Z'
+  }
+23:47:30.947 | +2 min
+  {
+    _id: '66b2e4a536b2d4a043736f5f',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b2e4a436b2d4a043736f5c',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '65e8244b8811e29da1794ff0',
+            quantity: 1,
+            _id: '66b2e4a436b2d4a043736f5d',
+            details: {
+              _id: '65e8244b8811e29da1794ff0',
+              sku: 'sds',
+              name: 'Cupcakes de Vainilla',
+              description:
+                ' Delicados cupcakes de vainilla decorados con crema de vainilla y chispas de colores.',
+              unit: 'sñldk',
+              expiration: 'lkjdlakj',
+              model: 'slkdj',
+              quantity: '92',
+              price: 230,
+              category: 'PastelCelebracion',
+              maker: 'sk',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712459/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_87239975fecc4ca3a2eb580f3b40788f%7Emv2_d_1736_2048_s_2.webp',
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1709712483/PastelCelebracion/65e8244b8811e29da1794ff0/64de7c_95296d1126d240abbe01f2949c623ddf%7Emv2.webp'
+              ],
+              status: 'ACTIVE',
+              weight: 12,
+              ingredients: [ 'djkls' ],
+              allergens: [ 'dsm' ],
+              nutritionalInformation: 'ds,.m',
+              isFeatured: true,
+              isVegetarian: false,
+              isGlutenFree: false,
+              createdAt: '2024-03-06T08:07:39.037Z'
+            }
+          }
+        ],
+        totalAmount: 230,
+        status: 'PENDING',
+        createdAt: '2024-08-07T03:06:12.962Z'
+      }
+    ],
+    totalAmount: 230,
+    stripeSessionID: null,
+    trackingNumber: '9M61RH',
+    createdAt: '2024-08-07T03:06:13.051Z'
+  }
+23:42:44.661 | +6 min
+  {
+    _id: '66b3089487d535751b74f232',
+    user: '6694467053f39eebd83990e3',
+    details: [
+      {
+        _id: '66b3089487d535751b74f22f',
+        user: '6694467053f39eebd83990e3',
+        products: [
+          {
+            product: '66916c9262dd33a391dd2648',
+            quantity: 1,
+            _id: '66b3089487d535751b74f230',
+            details: {
+              _id: '66916c9262dd33a391dd2648',
+              sku: '1',
+              name: 'Straciateli y Naranja-',
+              description: 'Sabor naranja endulzado',
+              unit: '12',
+              expiration: '12/08/2024',
+              model: 'redondo',
+              quantity: '-4',
+              price: 250,
+              category: 'PastelFinos',
+              maker: 'austins',
+              images: [
+
+                  'https://res.cloudinary.com/dfd0b4jhf/image/upload/v1720806549/PastelFinos/66916c9262dd33a391dd2648/Captura%20de%20pantalla%202024-07-12%20114448.png'
+              ],
+              status: 'ACTIVE',
+              weight: 1.23,
+              ingredients: [ 'naranja', 'agua', 'arina' ],
+              allergens: [ 'ninguno', 'otro' ],
+              nutritionalInformation: 'libre de gluten',
+              isFeatured: false,
+              isVegetarian: false,
+              isGlutenFree: true,
+              createdAt: '2024-07-12T17:49:06.841Z'
+            }
+          }
+        ],
+        totalAmount: 250,
+        deliveryType: 'En tienda',
+        deliveryDate: '2024-08-29T05:39:23.000Z',
+        status: 'PENDING',
+        createdAt: '2024-08-07T05:39:32.046Z'
+      }
+    ],
+    totalAmount: 250,
+    stripeSessionID:
+      'cs_test_a1tBxUQul66fsUV79AMGobDeLgV6JzfnyuyPHp7HyxnerdIVRMFPeXrWee',
+    trackingNumber: '5JBXYR',
+    createdAt: '2024-08-07T05:39:32.132Z'
+  }

@@ -1,0 +1,111 @@
+.form-container {
+  max-width: 800px; /* Ajusta según tu necesidad */
+  margin: auto;
+  padding: 20px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  width: 48%; /* Ajusta para que dos campos entren en una fila */
+
+}
+
+.form-field.full-width {
+  width: 100%;
+}
+input[type="text"],
+input[type="time"],
+input[type="email"],
+input[type="tel"],
+input[type="date"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+}
+
+label {
+  font-weight: bold;
+}
+.pi {
+  font-size: 1.5rem;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}
+
+.btn-finish {
+  width: 100%;
+  background-color: #038535;
+  border: 2px solid transparent;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.btn-finish:hover::after {
+  border: 2px solid #00c403;
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffffff;
+  transform: scaleX(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.btn-finish:hover::after {
+  transform: scaleX(1);
+}
+
+.image-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.image-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: rgba(255, 132, 0, 0.913);
+  border-radius: 70%;
+  // padding: 2px;
+
+  cursor: pointer;
+}

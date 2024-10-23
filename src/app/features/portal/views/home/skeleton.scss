@@ -1,0 +1,45 @@
+// .skeleton-container {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   padding: 20px; /* Agregar un poco de espacio alrededor del carrusel */
+// }
+
+// .card-carousel {
+//   width: 100%;
+// }
+
+.card {
+  .imagenket {
+    height: 200px;
+    max-width: 100%; /* Establecer un ancho máximo para las tarjetas en dispositivos móviles */
+  }
+  // margin: 0; /* Eliminar cualquier margen entre las tarjetas */
+  // width: calc(100% / 4 - 10px); /* Ajustar el ancho de las tarjetas para que haya 4 tarjetas por fila */
+  // max-width: calc(25% - 10px); /* Establecer un ancho máximo para asegurar que las tarjetas no se desborden */
+  // padding: 10px; /* Agregar un poco de espacio interno dentro de cada tarjeta */
+  // box-sizing: border-box; /* Incluir el padding en el ancho total de la tarjeta */
+}
+
+@media (max-width: 767px) {
+  .card {
+    border-radius: 15px;
+    // width: calc(100% / 2 - 5px); /* Reducir el ancho de las tarjetas a la mitad en dispositivos móviles */
+    // max-width: calc(50% - 5px); /* Establecer un ancho máximo para las tarjetas en dispositivos móviles */
+    // margin-right: 100px;
+  }
+
+  .imagenket {
+    max-width: 100; /* Establecer un ancho máximo para las tarjetas en dispositivos móviles */
+  }
+}
+
+
+// .fnd {
+//   background-color: rgba(0, 0, 0, 0.1); /* Fondo semi-transparente */
+//   // background-image: url('https://res.cloudinary.com/dfd0b4jhf/image/upload/v1721368338/public__/hp4xed4w3nbm9vvant2e.png'); /* Imagen de fondo */
+//   background-size: cover; /* Ajustar imagen al contenedor */
+//   background-position: center; /* Centrar imagen */
+//   padding: 20px; /* Padding opcional */
+//   border-radius: 8px; /* Bordes redondeados opcionales */
+// }

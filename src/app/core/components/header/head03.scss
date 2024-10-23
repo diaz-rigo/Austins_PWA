@@ -1,0 +1,96 @@
+@media (max-width: 768px) {
+
+
+
+  .button-container-mobile {
+    display: flex; /* Muestra el menú móvil solo en dispositivos móviles */
+    align-items: center;
+    position: relative;
+  }
+
+  .button-container-mobile:hover .mobile-menu {
+    display: block; /* Muestra el menú al pasar el mouse sobre el botón */
+  }
+
+  .button-container-pc {
+    display: none; /* Oculta el contenedor de PC en dispositivos móviles */
+  }
+
+p-button {
+  background-color: transparent; /* Color de fondo del botón */
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+}
+
+
+.mobile-menu-item_b1 {
+  padding: 10px 20px;
+  background-color: transparent;
+  text-align: center;
+  // color: #333;
+  text-decoration: none;
+  display: block;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  background: #333333;
+  color: #ffa500;
+  backdrop-filter: blur(10px);
+}
+
+
+
+
+
+
+Copy code
+/* CSS */
+.mobile-sidebar {
+  background-color: #f4f4f4; /* Color de fondo */
+  width: 250px; /* Ancho de la barra lateral */
+  height: 100%;
+  overflow-y: auto; /* Permite desplazarse verticalmente si el contenido es más largo que la altura */
+  padding: 20px; /* Espaciado interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.pi-user {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.user-name {
+  font-size: 18px;
+}
+
+.sidebar-divider {
+  margin: 20px 0;
+  border-top: 1px solid #ccc; /* Línea divisoria */
+}
+
+.mobile-menu-item {
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.mobile-menu-item span {
+  margin-right: 10px;
+}
+
+/* Estilos para los iconos */
+.pi {
+  font-size: 20px;
+}
+/* Estilos personalizados para el encabezado del p-dialog */

@@ -1,0 +1,198 @@
+<form
+  class="form-container"
+  [formGroup]="productForm"
+  (ngSubmit)="isEditing ? EDITARProducto() : agregarProducto()"
+  enctype="multipart/form-data"
+>
+  <p-toast></p-toast>
+  <div class="row">
+    <div class="form-field">
+      <input
+        type="text"
+        pInputText
+        placeholder="Nombre del Producto"
+        formControlName="name"
+      />
+    </div>
+    <div class="form-field">
+      <input type="text" pInputText placeholder="SKU" formControlName="sku" />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field full-width">
+      <textarea
+        rows="5"
+        pInputTextarea
+        placeholder="Descripción"
+        formControlName="description"
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <label for="Unidad">Unidad</label>
+      <input
+        type="text"
+        pInputText
+        placeholder="Unidad"
+        formControlName="unit"
+      />
+    </div>
+    <div class="form-field">
+      <label for="Precio">Precio</label>
+      <p-inputNumber
+        placeholder="Precio"
+        formControlName="price"
+        [useGrouping]="false"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <label for="Cantidad">Cantidad</label>
+      <p-inputNumber
+        placeholder="Cantidad"
+        formControlName="quantity"
+        [useGrouping]="false"
+      />
+    </div>
+    <div class="form-field">
+      <label for="Peso">Peso</label>
+      <p-inputNumber
+        placeholder="Peso"
+        formControlName="weight"
+        [useGrouping]="false"
+      ></p-inputNumber>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <input
+        type="text"
+        pInputText
+        placeholder="Fabricante"
+        formControlName="maker"
+      />
+    </div>
+    <div class="form-field">
+      <p-dropdown
+        [options]="categories"
+        formControlName="category"
+        placeholder="Categorías"
+        optionLabel="title"
+      ></p-dropdown>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field full-width">
+      <textarea
+        rows="5"
+        pInputTextarea
+        placeholder="Información Nutricional"
+        formControlName="nutritionalInformation"
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <p-checkbox
+        label="Destacado"
+        [binary]="true"
+        inputId="binary"
+        formControlName="isFeatured"
+      ></p-checkbox>
+    </div>
+    <div class="form-field">
+      <p-checkbox
+        label="Vegetariano"
+        formControlName="isVegetarian"
+        [binary]="true"
+        inputId="binary"
+      ></p-checkbox>
+    </div>
+    <div class="form-field">
+      <p-checkbox
+        label="Libre de Gluten"
+        formControlName="isGlutenFree"
+        [binary]="true"
+        inputId="binary"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <input
+        type="text"
+        pInputText
+        placeholder="Modelo"
+        formControlName="model"
+      />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field full-width">
+      <p-chips
+        formControlName="ingredients"
+        placeholder="Ingredientes"
+      ></p-chips>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field full-width">
+      <p-chips
+        formControlName="allergens"
+        placeholder="Alérgenos"
+      ></p-chips>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="form-field">
+      <p-checkbox
+        [binary]="true"
+        inputId="binary"
+        label="Activo"
+        formControlName="status"
+      ></p-checkbox>
+    </div>
+  </div>
+
+  <div class="form-field full-width">
+    <input
+      type="file"
+      name="images"
+      (change)="onImagesSelected($event)"
+      accept="image/*"
+      multiple
+    />
+    <div class="image-preview" *ngIf="productImages.length > 0">
+      <div *ngFor="let image of productImages" class="image-container">
+        <img
+          [src]="image.url"
+          alt="Imagen seleccionada del producto"
+          class="product-image"
+        />
+        <button pButton icon="pi pi-times" class="remove-button" (click)="removeSelectedImage(image)"></button>
+      </div>
+    </div>
+    <div *ngIf="productImages.length === 0 && (!product || product.images.length === 0) && !loading">
+      Seleccione una o más imágenes.
+    </div>
+    <p-progressSpinner *ngIf="loading" [style]="{ width: '30px', height: '30px' }"></p-progressSpinner>
+  </div>
+
+  <div class="btn">
+    <button class="btn-finish" pButton type="submit">
+      {{ isEditing ? "Guardar cambios" : "Guardar" }}
+    </button>
+  </div>
+</form>

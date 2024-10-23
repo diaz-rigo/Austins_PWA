@@ -1,0 +1,90 @@
+<p-sidebar [(visible)]="sidenav.opened" [baseZIndex]="10000">
+  <div class="user-info">
+    <span>{{ userName }}</span>
+    <span>Rol: {{ rol }}</span>
+  </div>
+  <ul>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('inicio')">
+        <i class="pi pi-home"></i>
+        <span>Inicio</span>
+      </a>
+    </li>
+    <!-- <li>
+      <a (click)="toggleSidebar(); redirectTo('ventas-grafica')">
+        <i class="pi pi-chart-line"></i>
+        <span>Charts-ventas</span>
+      </a>
+    </li> -->
+    <!-- <li>
+      <a (click)="toggleSidebar(); redirectTo('clasifica')">
+        <i class="pi pi-users"></i>
+        <span>clasificador clientes</span>
+      </a>
+    </li> -->
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('products-list')">
+        <i class="pi pi-tag"></i>
+        <span>Productos</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('users')">
+        <i class="pi pi-users"></i>
+        <span>Usuarios</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('sale-list')">
+        <i class="pi pi-dollar"></i>
+        <span>Ventas</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('sale-list')">
+        <i class="pi pi-shopping-cart"></i>
+        <span>Compras</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('sale-list')">
+        <i class="pi pi-building"></i>
+        <span>Proveedores</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('comentarios')">
+        <i class="pi pi-comments p-pr-2"></i>
+        <span>Comentarios Recibidos</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('AdminFaqView')">
+        <i class="pi pi-question-circle p-pr-2"></i>
+        <span>preguntas frecuentes</span>
+      </a>
+    </li>
+    <!-- <div class="statistic-card comments p-shadow-3 p-p-3 p-mb-3">
+      <h2><i class="pi pi-comments p-pr-2"></i> Comentarios Recibidos</h2>
+      <p>{{ comments }}</p>
+    </div> -->
+    <li>
+      <a (click)="toggleSidebar(); redirectTo('order-list')">
+        <i class="pi pi-file"></i>
+        <span>Pedidos</span>
+      </a>
+    </li>
+    <li>
+      <a (click)="logout()">
+        <i class="pi pi-sign-out"></i>
+        <span>Cerrar sesión</span>
+      </a>
+    </li>
+  </ul>
+</p-sidebar>
+
+<div class="bubble-container" (click)="toggleSidebar()">
+  <i class="pi" [ngClass]="{'pi-chevron-right': !sidenav.opened, 'pi-chevron-left': sidenav.opened}"></i>
+</div>
+
+<router-outlet></router-outlet>

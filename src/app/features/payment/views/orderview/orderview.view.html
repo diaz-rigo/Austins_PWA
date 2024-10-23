@@ -1,0 +1,6 @@
+<div *ngIf="sessionInit; else noSession">
+  <app-order-on-session></app-order-on-session>
+</div>
+<ng-template #noSession>
+  <app-order></app-order>
+</ng-template>

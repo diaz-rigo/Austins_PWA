@@ -1,0 +1,12 @@
+<div [@fadeInOut] class="privacy-policy-container" *ngIf="isPrivacyPolicyVisible">
+  <div class="privacy-content">
+    Al usar nuestra tienda, estás aceptando nuestras políticas de privacidad.
+  </div>
+  <a class="privacy-button" (click)="openPrivacyPolicy()">
+    Ir a nuestras políticas de privacidad <mat-icon class="icon1">open_in_new</mat-icon>
+  </a>
+  <button class="close-button" (click)="closePrivacyPolicy()">
+    <mat-icon class="icon1">clear</mat-icon>
+  </button>
+</div>
+    

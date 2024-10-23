@@ -1,0 +1,99 @@
+.log {
+  text-align: center;
+}
+
+.logo {
+  max-width: 80px;
+  height: auto;
+  border-radius: 8px;
+}
+
+h1 {
+  color: #333;
+}
+
+mat-form-field {
+  width: 100%;
+  margin: 0;
+}
+
+.login-form {
+  border-radius: 20px;
+  // box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  // padding: 1%;
+  max-width: 460px;
+  // max-width: auto;
+  margin: 0;
+  width: 100%;
+  padding: 20px;
+  .card {
+    // margin-top: 30px;
+    margin: 20px 0px;
+  }
+  input {
+    height: 40%;
+    border-radius: 8px;
+    width: 100%;
+  }
+}
+
+.login-form fieldset {
+  border: 1px solid #ebc9ab;
+  border-radius: 8px;
+  // justify-content: center;
+  // padding: 5px;
+}
+
+.login-form legend {
+
+  text-align: center;
+  justify-content: center;
+  color: #b49173;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  margin: 0px 0;
+  // border-radius: 100%;
+}
+
+.login-button {
+  margin-top: 10px;
+  background-color: #703824;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  width: 300px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s;
+}
+.login-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.login-button:not(:disabled):hover {
+  background-color: #a54c2c;
+}
+
+
+
+/* Oculta la barra de desplazamiento en navegadores WebKit (Chrome, Safari, etc.) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Estilos adicionales para navegadores que no son WebKit */
+/* Firefox */
+.login-form {
+  scrollbar-width: none;
+}
+
+/* Estilos adicionales para IE y Edge */
+.login-form {
+  -ms-overflow-style: none;
+}

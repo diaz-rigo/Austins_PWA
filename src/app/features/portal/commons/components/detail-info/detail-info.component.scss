@@ -1,0 +1,96 @@
+// Estilos para el contenedor principal
+.content {
+  h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .price {
+    font-size: 18px;
+    color: #ff3f0a;
+    margin-bottom: 10px;
+  }
+
+  .description {
+    font-size: 16px;
+    margin-bottom: 20px;
+
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  .availability {
+    font-size: 16px;
+
+    .quantity {
+      font-weight: bold;
+    }
+  }
+
+  .product-details {
+    margin-top: 30px;
+
+    h2 {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 16px;
+
+      strong {
+        font-weight: bold;
+      }
+    }
+
+    ul {
+      margin-top: 10px;
+
+      li {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .input-button-container {
+    display: flex;
+    align-items: center; // Alinea los elementos verticalmente
+    justify-content: space-between; //
+    .font-bold {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    p-splitter {
+      height: auto;
+    }
+    p-inputnumber {
+      width: 30%;
+      margin-right: 5px;
+      margin-left: 5px;
+      border: 1px solid #ccc; // Agrega un borde sólido
+      border-radius: 5px; // Añade bordes redondeados
+    }
+    .p-button{
+      border:  none;
+      background-color: #ff6600;
+    }
+
+    .btn {
+      margin-bottom: 0.2em;
+      height: 45px; // Altura fija del botón
+      right:  2;
+      margin-left:  5px;
+      background-color: #ff9d00;
+      color: #ffffff;
+      border: 1px solid transparent; // Borde transparente inicial
+      border-radius: 5px; // Bordes redondeados
+
+      &:hover,
+      &:focus {
+        background-color: #ffe8c2;
+      }
+    }
+  }
+}

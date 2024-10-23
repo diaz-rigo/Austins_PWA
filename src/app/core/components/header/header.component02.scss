@@ -1,0 +1,30 @@
+
+.mat-icon {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .material-icons.primary {
+    // padding: 20px 20px;
+    font-size: 24px; /* Tamaño más pequeño para dispositivos móviles */
+    margin-left: 3%;
+  }
+}
+
+.is-detail-route.policy-header {
+  backdrop-filter: blur(10px); /* Aplica el efecto de desenfoque al fondo */
+  background-color: #171614; /* Cambia el color de fondo a lo que necesites */
+}
+.is-detail-route.filter-section {
+  backdrop-filter: blur(10px);
+  background-color: #171614;
+}
+
+@media (min-width: 481px) {
+  .web-dialog {
+    max-height: 80vh; /* Ajusta según tus necesidades */
+    overflow-y: hidden; /* Agrega una barra de desplazamiento vertical si es necesario */
+    background-color: #ffa500;
+  }
+}
+
