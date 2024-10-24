@@ -126,7 +126,7 @@
     ora "5.4.1"
     rxjs "7.8.1"
 
-"@angular/animations@^17.0.0", "@angular/animations@^17.0.0 || ^18.0.0", "@angular/animations@^18.2.9", "@angular/animations@18.2.9":
+"@angular/animations@^17.0.0 || ^18.0.0", "@angular/animations@^18.2.9", "@angular/animations@18.2.9":
   version "18.2.9"
   resolved "https://registry.npmjs.org/@angular/animations/-/animations-18.2.9.tgz"
   integrity sha512-GAsTKENoTRVKgXX4ACBMMTp8SW4rW8u637uLag+ttJV2XBzC3YJlw5m6b/W4cdrmqZjztoEwUjR6CUTjBqMujQ==
@@ -164,7 +164,7 @@
     vite "5.4.6"
     watchpack "2.4.1"
 
-"@angular/cdk@^17.0.0", "@angular/cdk@^17.1.1", "@angular/cdk@17.1.1":
+"@angular/cdk@^17.1.1", "@angular/cdk@17.1.1":
   version "17.1.1"
   resolved "https://registry.npmjs.org/@angular/cdk/-/cdk-17.1.1.tgz"
   integrity sha512-Q5qC6VUyT7N/hj8eETdh0bkmBmsXm0JZikhXdBvcDUl8yPbhMPKQCkx4UJzBrZJg/+78XyI9FI/q8w/yQAJZJA==
@@ -196,7 +196,7 @@
     symbol-observable "4.0.0"
     yargs "17.7.2"
 
-"@angular/common@^17.0.0", "@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^17.0.1", "@angular/common@^18.2.9", "@angular/common@>= 15.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=17.0.0", "@angular/common@18.2.9":
+"@angular/common@^17.0.0", "@angular/common@^17.0.0 || ^18.0.0", "@angular/common@^18.2.9", "@angular/common@>= 15.0.0", "@angular/common@>=13.0.0", "@angular/common@>=14.0.0", "@angular/common@>=17.0.0", "@angular/common@18.2.9":
   version "18.2.9"
   resolved "https://registry.npmjs.org/@angular/common/-/common-18.2.9.tgz"
   integrity sha512-Opi6DVaU0aGyJqLk5jPmeYx559fp3afj4wuxM5aDzV4KEVGDVbNCpO0hMuwHZ6rtCjHhv1fQthgS48qoiQ6LKw==
@@ -224,7 +224,7 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^17.0.1", "@angular/core@^18.2.9", "@angular/core@>= 15.0.0", "@angular/core@>=13.0.0", "@angular/core@>=17.0.0", "@angular/core@18.2.9":
+"@angular/core@^17.0.0", "@angular/core@^17.0.0 || ^18.0.0", "@angular/core@^18.2.9", "@angular/core@>= 15.0.0", "@angular/core@>=13.0.0", "@angular/core@>=17.0.0", "@angular/core@18.2.9":
   version "18.2.9"
   resolved "https://registry.npmjs.org/@angular/core/-/core-18.2.9.tgz"
   integrity sha512-h9/Bzo/7LTPzzh9I/1Gk8TWOXPGeHt3jLlnYrCh2KbrWbTErNtW0V3ad5I3Zv+K2Z7RSl9Z3D3Y6ILH796N4ZA==
@@ -299,14 +299,14 @@
   dependencies:
     tslib "^2.3.0"
 
-"@angular/platform-browser@^17.0.0", "@angular/platform-browser@^17.0.0 || ^18.0.0", "@angular/platform-browser@^17.0.1", "@angular/platform-browser@^18.2.9", "@angular/platform-browser@18.2.9":
+"@angular/platform-browser@^17.0.0 || ^18.0.0", "@angular/platform-browser@^18.2.9", "@angular/platform-browser@18.2.9":
   version "18.2.9"
   resolved "https://registry.npmjs.org/@angular/platform-browser/-/platform-browser-18.2.9.tgz"
   integrity sha512-UNu6XjK0SV35FFe55yd1yefZI8tzflVKzev/RzC31XngrczhlH0+WCbae4rG1XJULzJwJ1R1p7gqq4+ktEczRQ==
   dependencies:
     tslib "^2.3.0"
 
-"@angular/router@^17.0.0", "@angular/router@^18.2.9":
+"@angular/router@^18.2.9":
   version "18.2.9"
   resolved "https://registry.npmjs.org/@angular/router/-/router-18.2.9.tgz"
   integrity sha512-D0rSrMf/sbhr5yQgz+LNBxdv1BR3S4pYDj1Exq6yVRKX8HSbjc5hxe/44VaOEKBh8StJ6GRiNOMoIcDt73Jang==
@@ -319,21 +319,6 @@
   integrity sha512-AIXp5D1zcRjUxZjJhWRjQFP5ZkCCjqOe53diiOuI0gHu8cwdGUUKeY2fwGb3XWOOgglwH0zKIk1Pqq/8dKAylQ==
   dependencies:
     tslib "^2.3.0"
-
-"@ant-design/colors@^7.0.0":
-  version "7.1.0"
-  resolved "https://registry.npmjs.org/@ant-design/colors/-/colors-7.1.0.tgz"
-  integrity sha512-MMoDGWn1y9LdQJQSHiCC20x3uZ3CwQnv9QMz6pCmJOrqdgM9YxsoVVY0wtrdXbmfSgnV0KNk6zi09NAhMR2jvg==
-  dependencies:
-    "@ctrl/tinycolor" "^3.6.1"
-
-"@ant-design/icons-angular@^17.0.0":
-  version "17.0.0"
-  resolved "https://registry.npmjs.org/@ant-design/icons-angular/-/icons-angular-17.0.0.tgz"
-  integrity sha512-MNEh3UbkSl6gkdb5MQRNHEuWI1DnU1dME9zSymnWCipEXN7MB0mcYHSfyYTqKL1j45ftp6l1UnsLvhokRYyhXA==
-  dependencies:
-    "@ant-design/colors" "^7.0.0"
-    tslib "^2.0.0"
 
 "@auth0/angular-jwt@^5.2.0":
   version "5.2.0"
@@ -1253,7 +1238,7 @@
     "@babel/types" "^7.4.4"
     esutils "^2.0.2"
 
-"@babel/runtime@^7.21.0", "@babel/runtime@^7.8.4", "@babel/runtime@7.25.0":
+"@babel/runtime@^7.8.4", "@babel/runtime@7.25.0":
   version "7.25.0"
   resolved "https://registry.npmjs.org/@babel/runtime/-/runtime-7.25.0.tgz"
   integrity sha512-7dRy4DwXwtzBrPbZflqxnvfxLF8kdZXPkhymtDeFoFqE6ldzjQFgYTtYIFARcLEYDrqfBfYcZt1WqFxRoyC9Rw==
@@ -1294,11 +1279,6 @@
   version "1.5.0"
   resolved "https://registry.npmjs.org/@colors/colors/-/colors-1.5.0.tgz"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
-
-"@ctrl/tinycolor@^3.6.1":
-  version "3.6.1"
-  resolved "https://registry.npmjs.org/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz"
-  integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
 
 "@discoveryjs/json-ext@0.6.1":
   version "0.6.1"
@@ -4009,13 +3989,6 @@ custom-event@~1.0.0:
   resolved "https://registry.npmjs.org/custom-event/-/custom-event-1.0.1.tgz"
   integrity sha512-GAj5FOq0Hd+RsCGVJxZuKaIDXDf3h6GQoNEjFgbLLI/trgtavwUbSnZ5pVfg27DVCaWjIohryS0JFwIJyT2cMg==
 
-date-fns@^2.16.1:
-  version "2.30.0"
-  resolved "https://registry.npmjs.org/date-fns/-/date-fns-2.30.0.tgz"
-  integrity sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==
-  dependencies:
-    "@babel/runtime" "^7.21.0"
-
 date-format@^4.0.14:
   version "4.0.14"
   resolved "https://registry.npmjs.org/date-format/-/date-format-4.0.14.tgz"
@@ -6202,16 +6175,6 @@ neo-async@^2.6.2:
   resolved "https://registry.npmjs.org/neo-async/-/neo-async-2.6.2.tgz"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-ng-zorro-antd@^17.3.0:
-  version "17.3.0"
-  resolved "https://registry.npmjs.org/ng-zorro-antd/-/ng-zorro-antd-17.3.0.tgz"
-  integrity sha512-dCJeNUlrPbR2izaHQuYg9GkCo0nY5PBQhjFyN+1Amj400udP6ussniyREe7otN+aVPX6dkVO8+UlsRgH5Gyakg==
-  dependencies:
-    "@angular/cdk" "^17.0.0"
-    "@ant-design/icons-angular" "^17.0.0"
-    date-fns "^2.16.1"
-    tslib "^2.3.0"
-
 ngx-captcha@^13.0.0:
   version "13.0.0"
   resolved "https://registry.npmjs.org/ngx-captcha/-/ngx-captcha-13.0.0.tgz"
@@ -7153,7 +7116,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-"rxjs@^6.0.0 || ^7.8.1", "rxjs@^6.4.0 || ^7.4.0", "rxjs@^6.5.3 || ^7.4.0", rxjs@~7.8.0, rxjs@7.8.1:
+"rxjs@^6.0.0 || ^7.8.1", "rxjs@^6.5.3 || ^7.4.0", rxjs@~7.8.0, rxjs@7.8.1:
   version "7.8.1"
   resolved "https://registry.npmjs.org/rxjs/-/rxjs-7.8.1.tgz"
   integrity sha512-AA3TVj+0A2iuIoQkWEK/tqFjBq2j+6PO6Y0zJcvzLAFhEFIO3HL0vls9hWLncZbAAbK0mar7oZ4V079I/qPMxg==
