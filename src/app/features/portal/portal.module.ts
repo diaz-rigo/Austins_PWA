@@ -2,7 +2,7 @@ import { ErrorInterceptor } from './../../shared/interceptor/error.interceptor';
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 // import { ErrorInterceptor } from 'src/app/shared/interceptor/error.interceptor';
 import { PortalRoutingModule } from './portal-routing.module';
 import { HomeViews } from './views/home/home.views';
@@ -21,9 +21,12 @@ import { PreguntasFreqView } from './views/preguntas-freq/preguntas-freq.view';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.module';
 import { NoConectView } from './views/no-conect/no-conect.view';
-@NgModule({ declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView, PreguntasFreqView, NoConectView,],
-    exports: [], imports: [DefaultImgModule, CommonModule, PortalRoutingModule, PortalCommonsModule, FieldsetModule], providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        provideHttpClient(withInterceptorsFromDi()),
-    ] })
+@NgModule({
+  declarations: [HomeViews, NotFondViews, DetailViews, AboutViews, PortalComponent, PoliticaPrivView, AcercaDeView, PoliticaCookiesView, TerminosCondicionesView, UnknownView,PreguntasFreqView, NoConectView, ],
+  imports: [DefaultImgModule,HttpClientModule,CommonModule, PortalRoutingModule, PortalCommonsModule,FieldsetModule],
+  exports:[],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
+})
 export class PortalModule {}
