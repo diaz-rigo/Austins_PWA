@@ -32,129 +32,129 @@ jobs:
         with:
           node-version: '16'
 
-      # 3. Cache de dependencias npm
-      - name: Cache npm dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+  #     # 3. Cache de dependencias npm
+  #     - name: Cache npm dependencies
+  #       uses: actions/cache@v2
+  #       with:
+  #         path: ~/.npm
+  #         key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-node-
 
-      # 4. Instalación de dependencias
-      - name: Install dependencies
-        run: npm install
+  #     # 4. Instalación de dependencias
+  #     - name: Install dependencies
+  #       run: npm install
 
-      # 5. Compilación del proyecto
-      - name: Build Austins PWA
-        run: npm run build
+  #     # 5. Compilación del proyecto
+  #     - name: Build Austins PWA
+  #       run: npm run build
 
-      # 6. Subir artefacto de compilación
-      - name: Upload Build Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: build
-          path: ./dist/austins
+  #     # 6. Subir artefacto de compilación
+  #     - name: Upload Build Artifact
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: build
+  #         path: ./dist/austins
 
-      # Notificación de éxito
-      - name: Post Success Comment
-        if: success()
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              body: '✅ Build and tests passed successfully!'
-            })
+  #     # Notificación de éxito
+  #     - name: Post Success Comment
+  #       if: success()
+  #       uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: ${{ github.event.pull_request.number }},
+  #             body: '✅ Build and tests passed successfully!'
+  #           })
 
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      # 1. Checkout del código
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  # test:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     # 1. Checkout del código
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
 
-      # 2. Configuración de Node.js
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16'
+  #     # 2. Configuración de Node.js
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v2
+  #       with:
+  #         node-version: '16'
 
-      # 3. Instalación de dependencias
-      - name: Install dependencies
-        run: npm install
+  #     # 3. Instalación de dependencias
+  #     - name: Install dependencies
+  #       run: npm install
 
-      # 4. Ejecución de pruebas unitarias
-      - name: Run Unit Tests
-        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+  #     # 4. Ejecución de pruebas unitarias
+  #     - name: Run Unit Tests
+  #       run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
 
-      # 5. Subir resultados de pruebas
-      - name: Upload Test Results
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: ./coverage
+  #     # 5. Subir resultados de pruebas
+  #     - name: Upload Test Results
+  #       uses: actions/upload-artifact@v3
+  #       with:
+  #         name: test-results
+  #         path: ./coverage
 
-      # Notificación de éxito
-      - name: Post Success Comment
-        if: success()
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              body: '✅ Unit tests passed successfully!'
-            })
+  #     # Notificación de éxito
+  #     - name: Post Success Comment
+  #       if: success()
+  #       uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: ${{ github.event.pull_request.number }},
+  #             body: '✅ Unit tests passed successfully!'
+  #           })
 
-      # Notificación de fallo
-      - name: Post Failure Comment
-        if: failure()
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              body: '❌ Unit tests failed. Please review the logs.'
-            })
+  #     # Notificación de fallo
+  #     - name: Post Failure Comment
+  #       if: failure()
+  #       uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: ${{ github.event.pull_request.number }},
+  #             body: '❌ Unit tests failed. Please review the logs.'
+  #           })
 
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.ref == 'refs/heads/main' || startsWith(github.ref,
-      'refs/heads/release/')
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: github.ref == 'refs/heads/main' || startsWith(github.ref,
+  #     'refs/heads/release/')
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: npm install
+  #     - name: Install dependencies
+  #       run: npm install
 
-      - name: Build for Production
-        run: npm run build --prod
+  #     - name: Build for Production
+  #       run: npm run build --prod
 
-      # - name: Deploy to Firebase (or Netlify/Vercel)
-      #   run: npm run deploy
-      #   env:
-      #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+  #     # - name: Deploy to Firebase (or Netlify/Vercel)
+  #     #   run: npm run deploy
+  #     #   env:
+  #     #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
-      # Notificación de éxito en el despliegue
-      - name: Post Success Comment
-        if: success()
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              body: '✅ Deployment successful!'
-            })
+  #     # Notificación de éxito en el despliegue
+  #     - name: Post Success Comment
+  #       if: success()
+  #       uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: ${{ github.event.pull_request.number }},
+  #             body: '✅ Deployment successful!'
+  #           })
 
-      # Notificación de fallo en el despliegue
-      - name: Post Failure Comment
-        if: failure()
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              body: '❌ Deployment failed. Please check the logs.'
-            })
+  #     # Notificación de fallo en el despliegue
+  #     - name: Post Failure Comment
+  #       if: failure()
+  #       uses: actions/github-script@v4
+  #       with:
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: ${{ github.event.pull_request.number }},
+  #             body: '❌ Deployment failed. Please check the logs.'
+  #           })
