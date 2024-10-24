@@ -1,6 +1,8 @@
 {
   "name": "austins",
   "version": "0.0.0",
+  "type": "module",
+
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -8,7 +10,7 @@
     "start-pwa": "ng build --base-href=/ && http-server -p 8080 -c-1 dist/austins",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "eslint . --ext .ts,.js"
+    "lint": "eslint ."
   },
   "private": true,
   "dependencies": {
