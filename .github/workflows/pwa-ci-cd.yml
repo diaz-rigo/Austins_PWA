@@ -45,9 +45,10 @@ jobs:
       - name: Install dependencies
         run: npm install -f
 
-  #     # 5. Compilación del proyecto
-  #     - name: Build Austins PWA
-  #       run: npm run build
+      # 5. Compilación del proyecto
+      - name: Build Austins PWA
+        run: npm run build
+
 
   #     # 6. Subir artefacto de compilación
   #     - name: Upload Build Artifact
