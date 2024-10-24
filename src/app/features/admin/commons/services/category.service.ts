@@ -1,7 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+export interface Category {
+  id: string;
+  name: string;
+  description: string;
+  // Agrega más campos según sea necesario
+}
 
 @Injectable({
   providedIn: 'root'
@@ -10,37 +17,54 @@ export class CategoryService {
 
   constructor(private http: HttpClient) { }
 
-  getAllCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.api}/category`)
-      .pipe(
-        catchError(error => {
-          console.error('Error en la solicitud:', error);
-          return throwError(error);
-        })
-      );
+  private handleError(error: any): Observable<never> {
+    console.error('Error en la solicitud:', error);
+    return throwError(error);
   }
 
-  getCategoryById(id: string): Observable<any> {
-    return this.http.get<any>(`${environment.api}/category/${id}`);
+  getAllCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${environment.api}/category`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  createCategory(categoryData: any): Observable<any> {
-    return this.http.post<any>(`${environment.api}/category`, categoryData);
+  getCategoryById(id: string): Observable<Category> {
+    return this.http.get<Category>(`${environment.api}/category/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  updateCategory(id: string, categoryData: any): Observable<any> {
-    return this.http.put<any>(`${environment.api}/category/${id}`, categoryData);
+  createCategory(categoryData: Category): Observable<Category> {
+    return this.http.post<Category>(`${environment.api}/category`, categoryData).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  deleteCategory(id: string): Observable<any> {
-    return this.http.delete<any>(`${environment.api}/category/${id}`);
+  updateCategory(id: string, categoryData: Category): Observable<Category> {
+    return this.http.put<Category>(`${environment.api}/category/${id}`, categoryData).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getMainCategories(): Observable<any[]> {
-    return this.http.get<any[]>(`${environment.api}/category/main/list`);
+  deleteCategory(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.api}/category/${id}`).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  getAllCategoriesPaginate(limit: number, skip: number): Observable<any[]> {
-    return this.http.post<any[]>(`${environment.api}/category/page/${limit}/${skip}`, {});
+  getMainCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`${environment.api}/category/main/list`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getAllCategoriesPaginate(limit: number, skip: number): Observable<Category[]> {
+    const params = new HttpParams()
+      .set('limit', limit.toString())
+      .set('skip', skip.toString());
+
+    return this.http.get<Category[]>(`${environment.api}/category/page`, { params }).pipe(
+      catchError(this.handleError)
+    );
   }
 }
