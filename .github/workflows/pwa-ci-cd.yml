@@ -98,13 +98,13 @@ jobs:
         with:
           node-version: '18'
 
-  #     # 3. Instalación de dependencias
-  #     - name: Install dependencies
-  #       run: npm install
+      # 3. Instalación de dependencias
+      - name: Install dependencies
+        run: npm install -f
 
-  #     # 4. Ejecución de pruebas unitarias
-  #     - name: Run Unit Tests
-  #       run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+      # 4. Ejecución de pruebas unitarias
+      - name: Run Unit Tests
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
 
   #     # 5. Subir resultados de pruebas
   #     - name: Upload Test Results
