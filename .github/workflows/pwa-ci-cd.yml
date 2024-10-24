@@ -58,19 +58,20 @@ jobs:
           name: build
           path: ./dist/austins
 
-      # Notificación de éxito
+# Notificación de éxito
       - name: Post Success Comment
         if: success()
         uses: actions/github-script@v4
         with:
           script: |
-            const issue_number = context.payload.pull_request ? context.payload.pull_request.number : context.issue.number;
             github.rest.issues.createComment({
-              issue_number: issue_number,
               owner: context.repo.owner,
               repo: context.repo.repo,
+              issue_number: context.payload.pull_request ? context.payload.pull_request.number : context.issue.number,
               body: '✅ Build and tests passed successfully!'
             });
+
+
 
 
   # test:
