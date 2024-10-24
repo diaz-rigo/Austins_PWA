@@ -58,16 +58,16 @@ jobs:
           name: build
           path: ./dist/austins
 
-  #     # Notificación de éxito
-  #     - name: Post Success Comment
-  #       if: success()
-  #       uses: actions/github-script@v4
-  #       with:
-  #         script: |
-  #           github.issues.createComment({
-  #             issue_number: ${{ github.event.pull_request.number }},
-  #             body: '✅ Build and tests passed successfully!'
-  #           })
+      # Notificación de éxito
+      - name: Post Success Comment
+        if: success()
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ github.event.pull_request.number }},
+              body: '✅ Build and tests passed successfully!'
+            })
 
   # test:
   #   runs-on: ubuntu-latest
