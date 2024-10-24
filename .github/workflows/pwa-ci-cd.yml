@@ -49,13 +49,14 @@ jobs:
       - name: Build Austins PWA
         run: npm run build
 
+      # 6. Subir artefacto de compilación
+      # 6. ++++
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
 
-  #     # 6. Subir artefacto de compilación
-  #     - name: Upload Build Artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: build
-  #         path: ./dist/austins
+        with:
+          name: build
+          path: ./dist/austins
 
   #     # Notificación de éxito
   #     - name: Post Success Comment
