@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CssStyleClass } from '@fortawesome/fontawesome-svg-core';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { ErrorInterceptor } from './shared/interceptor/error.interceptor';
 import { NgxUiLoaderModule, NgxUiLoaderService } from 'ngx-ui-loader';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -23,56 +23,48 @@ import { ConnectionStatusComponent } from './shared/components/connection-status
 
 import { DialogModule } from 'primeng/dialog';
 // import AOS from 'aos'; //AOS - 1
-@NgModule({
-  declarations: [
-    AppComponent,ConnectionStatusComponent
-  ],
-  imports: [
-    SocialLoginModule
-    ,DialogModule,
-    NgxCaptchaModule,
-    MatSnackBarModule,
-    NgxUiLoaderModule,
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    CoreComponentsModule,HttpClientModule, ServiceWorkerModule.register('ngsw-worker.js', {
-  enabled: !isDevMode(),
-  // Register the ServiceWorker as soon as the application is stable
-  // or after 30 seconds (whichever comes first).
-  registrationStrategy: 'registerWhenStable:30000'
-})
-  ],
-  // providers: [ScrollServiceService], // Asegúrate de proveer el servicio aquí
-  providers: [
-    ScrollServiceService,PedidoFloatComponent,
-    {
-      provide: 'SocialAuthServiceConfig',
-      useValue: {
-        autoLogin: false,
-        providers: [
-          {
-            id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider(
-              'clientId'
-            )
-          },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('clientId')
-          }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
-      } as SocialAuthServiceConfig,
-    }] ,
-
-  // providers: [
-  //   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  // ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent, ConnectionStatusComponent
+    ],
+    // providers: [
+    //   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    // ],
+    bootstrap: [AppComponent], imports: [SocialLoginModule,
+        DialogModule,
+        NgxCaptchaModule,
+        MatSnackBarModule,
+        NgxUiLoaderModule,
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        CoreComponentsModule, ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        })], providers: [
+        ScrollServiceService, PedidoFloatComponent,
+        {
+            provide: 'SocialAuthServiceConfig',
+            useValue: {
+                autoLogin: false,
+                providers: [
+                    {
+                        id: GoogleLoginProvider.PROVIDER_ID,
+                        provider: new GoogleLoginProvider('clientId')
+                    },
+                    {
+                        id: FacebookLoginProvider.PROVIDER_ID,
+                        provider: new FacebookLoginProvider('clientId')
+                    }
+                ],
+                onError: (err) => {
+                    console.error(err);
+                }
+            } as SocialAuthServiceConfig,
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {
 
   constructor(

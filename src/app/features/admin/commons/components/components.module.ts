@@ -16,7 +16,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MaterialModule } from '../material/material.module';
 // import { MatIconModule } from '@angular/material/icon';
 // import { ProductListComponent } from './product-list/product-list.component';
@@ -32,31 +32,24 @@ import { DefaultImgModule } from 'src/app/shared/pipes/default-img/default-img.m
 
 const COMPONENTS = [AdminHeaderComponent,AdminMenuComponent,OpenDeleteConfirmationComponent, CreateProductComponentComponent];
 
-@NgModule({
-  declarations: [...COMPONENTS, ],
-  exports: [...COMPONENTS],
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatListModule,
-    FormsModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatMenuModule,
-    RouterModule,
-    MatDialogModule,
-    MatBadgeModule,
-    HttpClientModule,
-    MatIconModule,
-    MaterialModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    FormsModule,
-    MatSnackBarModule,DefaultImgModule
-  ],
-  providers: [
-    ProductService, // Agrega ProductService como proveedor aquí
-    // ... otros servicios y proveedores si los tienes
-  ],
-})
+@NgModule({ declarations: [...COMPONENTS,],
+    exports: [...COMPONENTS], imports: [CommonModule,
+        MatSidenavModule,
+        MatListModule,
+        FormsModule,
+        MatToolbarModule,
+        MatButtonModule,
+        MatMenuModule,
+        RouterModule,
+        MatDialogModule,
+        MatBadgeModule,
+        MatIconModule,
+        MaterialModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        FormsModule,
+        MatSnackBarModule, DefaultImgModule], providers: [
+        ProductService,
+        provideHttpClient(withInterceptorsFromDi()),
+    ] })
 export class AdminComponentModule{ }
