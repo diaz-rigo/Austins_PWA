@@ -113,16 +113,29 @@ jobs:
           name: test-results
           path: ./coverage
 
+
       # Notificación de éxito
       - name: Post Success Comment
         if: success()
         uses: actions/github-script@v4
         with:
           script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
+            const pull_request = context.payload.pull_request;
+
+            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+              throw new Error('Missing required properties: pull request, owner, or repository information.');
+            }
+
+            const issue_number = pull_request.number;
+            const owner = context.repo.owner;
+            const repo = context.repo.repo;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number,
               body: '✅ Unit tests passed successfully!'
-            })
+            });
 
   #     # Notificación de fallo
   #     - name: Post Failure Comment
