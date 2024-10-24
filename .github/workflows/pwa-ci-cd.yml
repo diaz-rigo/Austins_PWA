@@ -92,11 +92,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-  #     # 2. Configuración de Node.js
-  #     - name: Setup Node.js
-  #       uses: actions/setup-node@v2
-  #       with:
-  #         node-version: '16'
+      # 2. Configuración de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
 
   #     # 3. Instalación de dependencias
   #     - name: Install dependencies
