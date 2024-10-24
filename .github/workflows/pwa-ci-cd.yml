@@ -1,3 +1,5 @@
+name: PWA CI/CD Workflow
+
 on:
   push:
     branches:
@@ -58,8 +60,6 @@ jobs:
           name: build
           path: ./dist/austins
 
-# Notificación de éxito
-# Notificación de éxito
       - name: Post Success Comment
         if: success()
         uses: actions/github-script@v4
@@ -69,15 +69,16 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            github.rest.issues.createComment({
+            if (!issue_number || !owner || !repo) {
+              throw new Error('Missing required properties for creating a comment');
+            }
+
+            await github.rest.issues.createComment({
               owner,
               repo,
               issue_number,
               body: '✅ Build and tests passed successfully!'
             });
-
-
-
 
   # test:
   #   runs-on: ubuntu-latest
