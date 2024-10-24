@@ -52,16 +52,15 @@ jobs:
         run: npm run build
 
       # 6. Subir artefacto de compilación
-      # 6. ++++
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v3
-
         with:
           name: build
           path: ./dist/austins
-      # Notificación de éxito
+
+      # Notificación de éxito (solo para pull request)
       - name: Post Success Comment
-        if: success()
+        if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
         uses: actions/github-script@v4
         with:
           script: |
