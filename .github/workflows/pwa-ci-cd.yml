@@ -113,16 +113,16 @@ jobs:
           name: test-results
           path: ./coverage
 
-  #     # Notificación de éxito
-  #     - name: Post Success Comment
-  #       if: success()
-  #       uses: actions/github-script@v4
-  #       with:
-  #         script: |
-  #           github.issues.createComment({
-  #             issue_number: ${{ github.event.pull_request.number }},
-  #             body: '✅ Unit tests passed successfully!'
-  #           })
+      # Notificación de éxito
+      - name: Post Success Comment
+        if: success()
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ github.event.pull_request.number }},
+              body: '✅ Unit tests passed successfully!'
+            })
 
   #     # Notificación de fallo
   #     - name: Post Failure Comment
