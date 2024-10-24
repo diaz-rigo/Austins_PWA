@@ -85,12 +85,12 @@ jobs:
             });
 
 
-  # test:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     # 1. Checkout del código
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
   #     # 2. Configuración de Node.js
   #     - name: Setup Node.js
