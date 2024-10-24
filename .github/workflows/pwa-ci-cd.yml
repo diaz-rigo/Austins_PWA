@@ -59,26 +59,32 @@ jobs:
         with:
           name: build
           path: ./dist/austins
-
+      # Notificación de éxito
       - name: Post Success Comment
         if: success()
         uses: actions/github-script@v4
         with:
           script: |
-            const issue_number = context.payload.pull_request ? context.payload.pull_request.number : context.issue.number;
+            // Obtenemos el contexto del pull request
+            const pull_request = context.payload.pull_request;
+
+            // Validamos que haya un número de PR, propietario y repositorio
+            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+              throw new Error('Missing required properties: pull request, owner, or repository information.');
+            }
+
+            const issue_number = pull_request.number;
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            if (!issue_number || !owner || !repo) {
-              throw new Error('Missing required properties for creating a comment');
-            }
-
+            // Crear el comentario utilizando el cliente REST
             await github.rest.issues.createComment({
               owner,
               repo,
               issue_number,
               body: '✅ Build and tests passed successfully!'
             });
+
 
   # test:
   #   runs-on: ubuntu-latest
