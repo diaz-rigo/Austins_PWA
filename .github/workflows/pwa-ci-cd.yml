@@ -63,8 +63,6 @@ jobs:
       - name: Post Success Comment
         if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
         uses: actions/github-script@v4
-        env:  # Pasar GITHUB_TOKEN como variable de entorno
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
             const pull_request = context.payload.pull_request;
@@ -77,9 +75,8 @@ jobs:
             const owner = context.repo.owner;
             const repo = context.repo.repo;
 
-            // Crear el comentario utilizando el cliente REST
-            const githubClient = require('@actions/github').getOctokit(process.env.GITHUB_TOKEN);
-            await githubClient.rest.issues.createComment({
+            // Crear el comentario utilizando el cliente REST proporcionado por la acción
+            await github.rest.issues.createComment({
               owner,
               repo,
               issue_number,
