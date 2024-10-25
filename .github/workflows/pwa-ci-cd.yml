@@ -183,34 +183,35 @@ jobs:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-        run: npx vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
+        # run: npx vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
+        run: npx vercel --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID
 
 
 # Notificación de éxito en el despliegue (solo para pull requests)
-      - name: Post Success Comment
-        if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-        uses: actions/github-script@v4
-        with:
-          script: |
-            // Obtenemos el contexto del pull request
-            const pull_request = context.payload.pull_request;
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR, propietario y repositorio
-            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-              throw new Error('Missing required properties: pull request, owner, or repository information.');
-            }
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
 
-            const issue_number = pull_request.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
 
-            // Crear el comentario de éxito
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number,
-              body: '✅ Deployment to Vercel successful!'
-            });
+      #       // Crear el comentario de éxito
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Deployment to Vercel successful!'
+      #       });
 
       # Notificación de fallo en el despliegue (solo para pull requests)
       # - name: Post Failure Comment
