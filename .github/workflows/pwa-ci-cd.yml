@@ -182,16 +182,20 @@ jobs:
         - name: Build for Production
           run: npm run build --prod
 
-        - name: Install Vercel CLI and deploy
+        - name: Install Vercel CLI
+          run: npm install -g vercel@latest
+
+        - name: Check Vercel Project
+          run: vercel projects ls --token ${{ secrets.VERCEL_TOKEN }} # Verifica los proyectos disponibles
+
+        - name: Deploy to Vercel
           env:
             VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
             VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
             VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           run: |
-            npm install -g vercel@37.12.1
             vercel pull --environment=production --token $VERCEL_TOKEN
             vercel deploy --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
-
 
 
 
