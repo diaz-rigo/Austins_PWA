@@ -113,15 +113,15 @@ jobs:
           name: test-results
           path: ./coverage
 
-
-      # Notificación de éxito
       - name: Post Success Comment
-        if: success()
+        if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
         uses: actions/github-script@v4
         with:
           script: |
+            // Obtenemos el contexto del pull request
             const pull_request = context.payload.pull_request;
 
+            // Validamos que haya un número de PR, propietario y repositorio
             if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
               throw new Error('Missing required properties: pull request, owner, or repository information.');
             }
