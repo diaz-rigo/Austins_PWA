@@ -63,11 +63,12 @@ jobs:
       - name: Post Success Comment
         if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
         uses: actions/github-script@v4
+        env:  # Pasar GITHUB_TOKEN como variable de entorno
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           script: |
             const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR
             if (!pull_request || !pull_request.number) {
               throw new Error('Missing pull request information.');
             }
@@ -77,12 +78,14 @@ jobs:
             const repo = context.repo.repo;
 
             // Crear el comentario utilizando el cliente REST
-            await github.rest.issues.createComment({
+            const githubClient = require('@actions/github').getOctokit(process.env.GITHUB_TOKEN);
+            await githubClient.rest.issues.createComment({
               owner,
               repo,
               issue_number,
               body: '✅ Build and tests passed successfully!'
             });
+
 
 
 
