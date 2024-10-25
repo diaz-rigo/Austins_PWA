@@ -176,30 +176,29 @@ jobs:
 
       - name: Build for Production
         run: npm run build --prod
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: npx vercel --prod --token $VERCEL_TOKEN
 
-  #     # - name: Deploy to Firebase (or Netlify/Vercel)
-  #     #   run: npm run deploy
-  #     #   env:
-  #     #     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      # - name: Post Success Comment
+      #   if: success()
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       github.issues.createComment({
+      #         issue_number: ${{ github.event.pull_request.number }},
+      #         body: '✅ Deployment to Vercel successful!'
+      #       })
 
-  #     # Notificación de éxito en el despliegue
-  #     - name: Post Success Comment
-  #       if: success()
-  #       uses: actions/github-script@v4
-  #       with:
-  #         script: |
-  #           github.issues.createComment({
-  #             issue_number: ${{ github.event.pull_request.number }},
-  #             body: '✅ Deployment successful!'
-  #           })
-
-  #     # Notificación de fallo en el despliegue
-  #     - name: Post Failure Comment
-  #       if: failure()
-  #       uses: actions/github-script@v4
-  #       with:
-  #         script: |
-  #           github.issues.createComment({
-  #             issue_number: ${{ github.event.pull_request.number }},
-  #             body: '❌ Deployment failed. Please check the logs.'
-  #           })
+      # - name: Post Failure Comment
+      #   if: failure()
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       github.issues.createComment({
+      #         issue_number: ${{ github.event.pull_request.number }},
+      #         body: '❌ Deployment to Vercel failed. Please check the logs.'
+      #       })
