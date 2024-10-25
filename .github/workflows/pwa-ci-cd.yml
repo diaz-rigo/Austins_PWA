@@ -59,30 +59,30 @@ jobs:
           path: ./dist/austins
 
       # Notificación de éxito (solo para pull request)
-      # Notificación de éxito (solo para pull request)
-      - name: Post Success Comment
-        if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-        uses: actions/github-script@v4
-        with:
-          script: |
-            const pull_request = context.payload.pull_request;
+      # # Notificación de éxito (solo para pull request)
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR
-            if (!pull_request || !pull_request.number) {
-              throw new Error('Missing pull request information.');
-            }
+      #       // Validamos que haya un número de PR
+      #       if (!pull_request || !pull_request.number) {
+      #         throw new Error('Missing pull request information.');
+      #       }
 
-            const issue_number = pull_request.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
 
-            // Crear el comentario utilizando el cliente REST proporcionado por la acción
-            await github.issues.createComment({
-              owner,
-              repo,
-              issue_number,
-              body: '✅ Build and tests passed successfully!'
-            });
+      #       // Crear el comentario utilizando el cliente REST proporcionado por la acción
+      #       await github.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Build and tests passed successfully!'
+      #       });
 
 
 
@@ -115,53 +115,53 @@ jobs:
           name: test-results
           path: ./coverage
 
-      - name: Post Success Comment
-        if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-        uses: actions/github-script@v4
-        with:
-          script: |
-            // Obtenemos el contexto del pull request
-            const pull_request = context.payload.pull_request;
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR, propietario y repositorio
-            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-              throw new Error('Missing required properties: pull request, owner, or repository information.');
-            }
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
 
-            const issue_number = pull_request.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
 
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number,
-              body: '✅ Unit tests passed successfully!'
-            });
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Unit tests passed successfully!'
+      #       });
 
-            - name: Post Failure Comment
-            if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-            uses: actions/github-script@v4
-            with:
-              script: |
-                // Obtenemos el contexto del pull request
-                const pull_request = context.payload.pull_request;
+      #       - name: Post Failure Comment
+      #       if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
+      #       uses: actions/github-script@v4
+      #       with:
+      #         script: |
+      #           // Obtenemos el contexto del pull request
+      #           const pull_request = context.payload.pull_request;
 
-                // Validamos que haya un número de PR, propietario y repositorio
-                if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-                  throw new Error('Missing required properties: pull request, owner, or repository information.');
-                }
+      #           // Validamos que haya un número de PR, propietario y repositorio
+      #           if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #             throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #           }
 
-                const issue_number = pull_request.number;
-                const owner = context.repo.owner;
-                const repo = context.repo.repo;
+      #           const issue_number = pull_request.number;
+      #           const owner = context.repo.owner;
+      #           const repo = context.repo.repo;
 
-                await github.rest.issues.createComment({
-                  owner,
-                  repo,
-                  issue_number,
-                  body: '❌ Unit tests failed. Please review the logs.'
-                });
+      #           await github.rest.issues.createComment({
+      #             owner,
+      #             repo,
+      #             issue_number,
+      #             body: '❌ Unit tests failed. Please review the logs.'
+      #           });
 
 
   deploy:
@@ -213,28 +213,28 @@ jobs:
             });
 
       # Notificación de fallo en el despliegue (solo para pull requests)
-      - name: Post Failure Comment
-        if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-        uses: actions/github-script@v4
-        with:
-          script: |
-            // Obtenemos el contexto del pull request
-            const pull_request = context.payload.pull_request;
+      # - name: Post Failure Comment
+      #   if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR, propietario y repositorio
-            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-              throw new Error('Missing required properties: pull request, owner, or repository information.');
-            }
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
 
-            const issue_number = pull_request.number;
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
 
-            // Crear el comentario de fallo
-            await github.rest.issues.createComment({
-              owner,
-              repo,
-              issue_number,
-              body: '❌ Deployment to Vercel failed. Please check the logs.'
-            });
+      #       // Crear el comentario de fallo
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '❌ Deployment to Vercel failed. Please check the logs.'
+      #       });
 
