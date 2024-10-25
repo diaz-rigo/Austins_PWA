@@ -177,7 +177,7 @@ jobs:
             node-version: '18.x'
 
         - name: Install dependencies
-          run: npm ci --legacy-peer-deps # Usa la opción para evitar conflictos
+          run: npm ci --legacy-peer-deps
 
         - name: Build for Production
           run: npm run build --prod
@@ -185,18 +185,13 @@ jobs:
         - name: Install Vercel CLI
           run: npm install -g vercel@latest
 
-        - name: Check Vercel Project
-          run: vercel projects ls --token ${{ secrets.VERCEL_TOKEN }} # Verifica los proyectos disponibles
-
         - name: Deploy to Vercel
           env:
             VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
             VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
             VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
           run: |
-            vercel pull --environment=production --token $VERCEL_TOKEN
             vercel deploy --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID --project $VERCEL_PROJECT_ID
-
 
 
 
