@@ -59,17 +59,17 @@ jobs:
           path: ./dist/austins
 
       # Notificación de éxito (solo para pull request)
+      # Notificación de éxito (solo para pull request)
       - name: Post Success Comment
         if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
         uses: actions/github-script@v4
         with:
           script: |
-            // Obtenemos el contexto del pull request
             const pull_request = context.payload.pull_request;
 
-            // Validamos que haya un número de PR, propietario y repositorio
-            if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-              throw new Error('Missing required properties: pull request, owner, or repository information.');
+            // Validamos que haya un número de PR
+            if (!pull_request || !pull_request.number) {
+              throw new Error('Missing pull request information.');
             }
 
             const issue_number = pull_request.number;
@@ -83,6 +83,7 @@ jobs:
               issue_number,
               body: '✅ Build and tests passed successfully!'
             });
+
 
 
   test:
