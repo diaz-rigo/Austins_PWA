@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "name": "austins-pwa",
+  "scope": "team_pxbqFHGDLy5Pe5r4ECoWxnNg",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
