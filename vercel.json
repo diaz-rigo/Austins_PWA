@@ -3,8 +3,11 @@
   "name": "austins-pwa",
   "builds": [
     {
-      "src": "dist/austins/**/*",
-      "use": "@vercel/static"
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/austins"
+      }
     }
   ],
   "routes": [
