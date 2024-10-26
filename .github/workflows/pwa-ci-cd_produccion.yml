@@ -1,0 +1,267 @@
+name:  Production PWA CI/CD Workflow
+# name: Vercel Production Deployment
+
+on:
+  push:
+    branches:
+      - main
+      - release/*
+      - development
+  pull_request:
+    branches:
+      - main
+      - release/*
+      - development
+  workflow_dispatch:
+    # Para ejecutar manualmente
+    inputs:
+      environment:
+        description: Seleccionar entorno
+        required: true
+        default: staging
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configuración de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Cambiado de '16' a '18'
+
+      # 3. Cache de dependencias npm
+      - name: Cache npm dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # 4. Instalación de dependencias
+      - name: Install dependencies
+        run: npm install -f
+
+      # 5. Compilación del proyecto
+      - name: Build Austins PWA
+        run: npm run build
+
+      # 6. Subir artefacto de compilación
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: ./dist/austins
+
+      # Notificación de éxito (solo para pull request)
+      # # Notificación de éxito (solo para pull request)
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       const pull_request = context.payload.pull_request;
+
+      #       // Validamos que haya un número de PR
+      #       if (!pull_request || !pull_request.number) {
+      #         throw new Error('Missing pull request information.');
+      #       }
+
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
+
+      #       // Crear el comentario utilizando el cliente REST proporcionado por la acción
+      #       await github.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Build and tests passed successfully!'
+      #       });
+
+
+
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Checkout del código
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # 2. Configuración de Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      # 3. Instalación de dependencias
+      - name: Install dependencies
+        run: npm install -f
+
+      # 4. Ejecución de pruebas unitarias
+      - name: Run Unit Tests
+        run: npm run test -- --no-watch --no-progress --browsers=ChromeHeadless
+
+      # 5. Subir resultados de pruebas
+      - name: Upload Test Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-results
+          path: ./coverage
+
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
+
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
+
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
+
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Unit tests passed successfully!'
+      #       });
+
+      #       - name: Post Failure Comment
+      #       if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
+      #       uses: actions/github-script@v4
+      #       with:
+      #         script: |
+      #           // Obtenemos el contexto del pull request
+      #           const pull_request = context.payload.pull_request;
+
+      #           // Validamos que haya un número de PR, propietario y repositorio
+      #           if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #             throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #           }
+
+      #           const issue_number = pull_request.number;
+      #           const owner = context.repo.owner;
+      #           const repo = context.repo.repo;
+
+      #           await github.rest.issues.createComment({
+      #             owner,
+      #             repo,
+      #             issue_number,
+      #             body: '❌ Unit tests failed. Please review the logs.'
+      #           });
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel
+
+      - name: Pull Vercel Environment Information
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build Project Artifacts
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy Project Artifacts
+        run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
+  # deploy:
+  #   runs-on: ubuntu-latest
+  #   needs: build
+  #   if: github.ref == 'refs/heads/development' || startsWith(github.ref, 'refs/heads/release/')
+
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+
+  #     - name: Install Node.js
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: '18.x'
+
+  #     - name: Install dependencies
+  #       run: npm ci --legacy-peer-deps
+
+  #     - name: Build for Production
+  #       run: npm run build --prod
+
+  #     - name: Install Vercel CLI
+  #       run: npm install -g vercel@latest
+
+  #     - name: Deploy to Vercel
+  #       env:
+  #         VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+  #         VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  #       run: |
+  #         vercel deploy --prod --token $VERCEL_TOKEN --scope $VERCEL_ORG_ID
+
+
+
+
+
+# Notificación de éxito en el despliegue (solo para pull requests)
+      # - name: Post Success Comment
+      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
+
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
+
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
+
+      #       // Crear el comentario de éxito
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '✅ Deployment to Vercel successful!'
+      #       });
+
+      # Notificación de fallo en el despliegue (solo para pull requests)
+      # - name: Post Failure Comment
+      #   if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
+      #   uses: actions/github-script@v4
+      #   with:
+      #     script: |
+      #       // Obtenemos el contexto del pull request
+      #       const pull_request = context.payload.pull_request;
+
+      #       // Validamos que haya un número de PR, propietario y repositorio
+      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
+      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
+      #       }
+
+      #       const issue_number = pull_request.number;
+      #       const owner = context.repo.owner;
+      #       const repo = context.repo.repo;
+
+      #       // Crear el comentario de fallo
+      #       await github.rest.issues.createComment({
+      #         owner,
+      #         repo,
+      #         issue_number,
+      #         body: '❌ Deployment to Vercel failed. Please check the logs.'
+      #       });
+
