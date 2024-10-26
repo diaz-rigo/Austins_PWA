@@ -7,8 +7,7 @@
 		"build": "ng build ",
 		"start-pwa": "ng build --base-href=/ && http-server -p 8080 -c-1 dist/austins",
 		"watch": "ng build --watch --configuration development",
-    "test:prod": "ng test --browsers=ChromeHeadless --watch=false --code-coverage"
-
+		"test": "ng test"
 	},
 	"private": true,
 	"dependencies": {
