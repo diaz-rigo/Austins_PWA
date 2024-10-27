@@ -44,6 +44,9 @@
 						"ngswConfigPath": "ngsw-config.json"
 					},
 					"configurations": {
+            "e2e": {
+              "aot": true
+            },
 						"production": {
 							"budgets": [
 								{
