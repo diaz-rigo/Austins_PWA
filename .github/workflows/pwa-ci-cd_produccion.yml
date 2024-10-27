@@ -7,11 +7,15 @@ on:
       - main
       - release/*
       - development
+      - feature/*
+
   pull_request:
     branches:
       - main
       - release/*
       - development
+      - feature/*
+
   workflow_dispatch:
     # Para ejecutar manualmente
     inputs:
