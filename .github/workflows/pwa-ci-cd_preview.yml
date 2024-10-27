@@ -191,7 +191,7 @@ jobs:
       #             body: '❌ Unit tests failed. Please review the logs.'
       #           });
   Deploy-Preview:
-      needs: [Test] # Asegúrate de que hay un trabajo llamado Test
+      # needs: [Test] # Asegúrate de que hay un trabajo llamado Test
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
