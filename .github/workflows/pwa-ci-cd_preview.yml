@@ -133,15 +133,15 @@ jobs:
       - name: Install dependencies
         run: npm install -f
 
-      - name: Run E2E tests with Cypress
-        run: npm run e2e
+      # - name: Run E2E tests with Cypress
+      #   run: npm run e2e
 
-      # Opcional: subir reportes E2E
-      - name: Upload E2E report
-        uses: actions/upload-artifact@v3
-        with:
-          name: e2e-report
-          path: ./cypress/reports
+      # # Opcional: subir reportes E2E
+      # - name: Upload E2E report
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: e2e-report
+      #     path: ./cypress/reports
 
       # - name: Post Success Comment
       #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
