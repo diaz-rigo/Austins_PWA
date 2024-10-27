@@ -266,14 +266,24 @@ jobs:
       #         issue_number,
       #         body: '❌ Deployment to Vercel failed. Please check the logs.'
       #       });
-
-  notify:
+  notify-email:
     runs-on: ubuntu-latest
-    if: ${{ always() }} # Siempre se ejecuta, independientemente del resultado de los jobs anteriores
+    if: ${{ always() }}
     steps:
-      - name: Notify on Success/Failure
-        uses: slackapi/slack-github-action@v1.23.0
+      - name: Send Notification via Email
+        uses: dawidd6/action-send-mail@v3
         with:
-          slack-message: 'Pipeline ${{ github.workflow }} ${{ job.status }}'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+          server_address: smtp.gmail.com  # Configura el servidor SMTP, en este caso se usa Gmail
+          server_port: 465                # Puerto de SMTP para conexiones SSL
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Pipeline Result: ${{ job.status }}"
+          body: |
+            El pipeline ha completado su ejecución.
+
+            Workflow: ${{ github.workflow }}
+            Job Status: ${{ job.status }}
+            Event: ${{ github.event_name }}
+            Repository: ${{ github.repository }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}
