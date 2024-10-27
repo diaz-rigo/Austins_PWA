@@ -61,32 +61,6 @@ jobs:
           name: build
           path: ./dist/austins
 
-      # Notificación de éxito (solo para pull request)
-      # # Notificación de éxito (solo para pull request)
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR
-      #       if (!pull_request || !pull_request.number) {
-      #         throw new Error('Missing pull request information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario utilizando el cliente REST proporcionado por la acción
-      #       await github.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Build and tests passed successfully!'
-      #       });
-
 
 
 
@@ -143,53 +117,7 @@ jobs:
       #     name: e2e-report
       #     path: ./cypress/reports
 
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
 
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Unit tests passed successfully!'
-      #       });
-
-      #       - name: Post Failure Comment
-      #       if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-      #       uses: actions/github-script@v4
-      #       with:
-      #         script: |
-      #           // Obtenemos el contexto del pull request
-      #           const pull_request = context.payload.pull_request;
-
-      #           // Validamos que haya un número de PR, propietario y repositorio
-      #           if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #             throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #           }
-
-      #           const issue_number = pull_request.number;
-      #           const owner = context.repo.owner;
-      #           const repo = context.repo.repo;
-
-      #           await github.rest.issues.createComment({
-      #             owner,
-      #             repo,
-      #             issue_number,
-      #             body: '❌ Unit tests failed. Please review the logs.'
-      #           });
   Deploy-Preview:
       # needs: [Test] # Asegúrate de que hay un trabajo llamado Test
       runs-on: ubuntu-latest
@@ -212,60 +140,6 @@ jobs:
 
 
 
-
-
-
-# Notificación de éxito en el despliegue (solo para pull requests)
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario de éxito
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Deployment to Vercel successful!'
-      #       });
-
-      # Notificación de fallo en el despliegue (solo para pull requests)
-      # - name: Post Failure Comment
-      #   if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario de fallo
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '❌ Deployment to Vercel failed. Please check the logs.'
-      #       });
   notify-email:
     runs-on: ubuntu-latest
     if: ${{ always() }}
