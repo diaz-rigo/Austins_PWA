@@ -141,7 +141,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: e2e-report
-          path: ./e2e-reports
+          path: ./cypress/reports
+
       # - name: Post Success Comment
       #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
       #   uses: actions/github-script@v4
