@@ -267,3 +267,13 @@ jobs:
       #         body: '❌ Deployment to Vercel failed. Please check the logs.'
       #       });
 
+  notify:
+    runs-on: ubuntu-latest
+    if: ${{ always() }} # Siempre se ejecuta, independientemente del resultado de los jobs anteriores
+    steps:
+      - name: Notify on Success/Failure
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          slack-message: 'Pipeline ${{ github.workflow }} ${{ job.status }}'
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
