@@ -16,6 +16,11 @@ export default [
       "no-unused-vars": "warn",
       "no-console": "off",
     },
-    ignores: ["dist/**/*"], // Ignora todos los archivos en la carpeta dist
+    ignores: [
+      // Ignorar la carpeta dist y otros patrones según sea necesario
+      "dist/**/*",
+      "node_modules/**/*",
+      "**/*.min.js", // Ignorar archivos minificados
+    ],
   },
 ];
