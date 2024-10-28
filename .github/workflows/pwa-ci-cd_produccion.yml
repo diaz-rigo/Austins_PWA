@@ -23,6 +23,10 @@ on:
         description: Seleccionar entorno
         required: true
         default: staging
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
 
 jobs:
   build:
@@ -68,6 +72,8 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
       # 1. Checkout del código
       - name: Checkout repository
@@ -93,6 +99,19 @@ jobs:
         with:
           name: test-results
           path: ./coverage
+          
+      # 6. Comentar en Pull Request (si corresponde)
+      - name: Comment on Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ github.event.pull_request.number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "El pipeline ha completado su ejecución con estado: ${{ job.status }}."
+            })
 
 
   Deploy-Production:

@@ -60,7 +60,13 @@ jobs:
       # 4. Instalación de dependencias
       - name: Install dependencies
         run: npm install -f
+      # 5. Ejecución de Linter
+      - name: Run Linter
+        run: npm run lint
 
+      # 6. Ejecución de Prettier
+      - name: Run Prettier
+        run: npx prettier --check .
       # 5. Compilación del proyecto
       - name: Build Austins PWA
         run: npm run build
