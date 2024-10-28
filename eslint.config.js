@@ -1,26 +1,10 @@
-// eslint.config.js
-import { defineConfig } from 'eslint-define-config';
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
-export default defineConfig({
-  languageOptions: {
-    parserOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-    },
-    globals: {
-      browser: true,
-      node: true,
-      es6: true,
-    },
-  },
-  rules: {
-    "no-unused-vars": "warn",
-    "no-console": "off",
-  },
-  ignores: [
-    // Ignorar la carpeta dist y otros patrones según sea necesario
-    "dist/**/*",
-    "node_modules/**/*",
-    "**/*.min.js", // Ignorar archivos minificados
-  ],
-});
+
+export default [
+  {files: ["**/*.{js,mjs,cjs,ts}"]},
+  {files: ["**/*.js"], languageOptions: {sourceType: "script"}},
+  {languageOptions: { globals: globals.browser }},
+  ...tseslint.configs.recommended,
+];
