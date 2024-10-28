@@ -22,14 +22,25 @@ on:
         required: true
         default: staging
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
+  # 2. Usa el PAT_TOKEN para acceder a GitHub
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Sets custom GITHUB_TOKEN for all steps in the job
     steps:
       # 1. Checkout del código
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
+
+      # Aquí puedes agregar otros pasos de construcción, pruebas o despliegue...
 
       # 2. Configuración de Node.js
       - name: Setup Node.js
@@ -71,7 +82,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Configuración de Node.js
+
+
+    # 2. Configuración de Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -91,6 +104,7 @@ jobs:
         with:
           name: test-results
           path: ./coverage
+
 
       # 6. Comentar en Pull Request (si corresponde)
       - name: Comment on Pull Request
