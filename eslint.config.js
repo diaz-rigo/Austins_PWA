@@ -1,10 +1,15 @@
-import globals from "globals";
-import tseslint from "typescript-eslint";
-
-
-export default [
-  {files: ["**/*.{js,mjs,cjs,ts}"]},
-  {files: ["**/*.js"], languageOptions: {sourceType: "script"}},
-  {languageOptions: { globals: globals.browser }},
-  ...tseslint.configs.recommended,
-];
+module.exports = {
+  parser: '@typescript-eslint/parser', // Definir el analizador para TypeScript
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended', // Usar las recomendaciones de @typescript-eslint
+  ],
+  parserOptions: {
+    ecmaVersion: 2020,
+    sourceType: 'module',
+  },
+  rules: {
+    // Aquí puedes agregar o sobrescribir reglas específicas
+  },
+  ignores: ['node_modules'], // Ignorar la carpeta node_modules
+};

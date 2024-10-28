@@ -44,9 +44,6 @@
 						"ngswConfigPath": "ngsw-config.json"
 					},
 					"configurations": {
-            "e2e": {
-              "aot": true
-            },
 						"production": {
 							"budgets": [
 								{
@@ -77,8 +74,6 @@
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"configurations": {
 						"production": {
-              "aot": true,
-              "buildOptimizer": true,
 							"browserTarget": "austins:build:production"
 						},
 						"development": {
