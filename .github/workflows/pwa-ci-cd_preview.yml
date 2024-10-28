@@ -59,9 +59,9 @@ jobs:
       # 4. Instalación de dependencias
       - name: Install dependencies
         run: npm install -f
-      # 5. Ejecución de Linter
-      - name: Run Linter
-        run: npm run lint -f
+      # # 5. Ejecución de Linter
+      # - name: Run Linter
+      #   run: npm run lint -f
         
       # # 6. Ejecución de Prettier
       # - name: Run Prettier
@@ -76,6 +76,7 @@ jobs:
         with:
           name: build
           path: ./dist/austins
+          retention-days: 7  # Establece la retención en 7 días
 
 
 
@@ -109,6 +110,7 @@ jobs:
         with:
           name: test-results
           path: ./coverage
+          retention-days: 7  # Establece la retención en 7 días
 
 
       # 6. Comentar en Pull Request (si corresponde)

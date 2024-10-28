@@ -1,18 +1,31 @@
-// @ts-check
-const eslint = require("@eslint/js");
-const tseslint = require("typescript-eslint");
-const angular = require("angular-eslint");
+// eslint.config.js
 
-module.exports = tseslint.config(
+// Import necessary modules and configurations
+const eslint = require("@eslint/js");
+const tseslint = require("@typescript-eslint/eslint-plugin");
+const tsParser = require("@typescript-eslint/parser");
+const angular = require("@angular-eslint/eslint-plugin");
+const angularTemplate = require("@angular-eslint/eslint-plugin-template");
+
+module.exports = [
+  // Configuration for TypeScript files
   {
     files: ["**/*.ts"],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        project: "./tsconfig.json",
+      },
+    },
+    plugins: {
+      "@typescript-eslint": tseslint,
+      "@angular-eslint": angular,
+    },
     extends: [
-      eslint.configs.recommended,
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.stylistic,
-      ...angular.configs.tsRecommended,
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:@angular-eslint/recommended",
     ],
-    processor: angular.processInlineTemplates,
     rules: {
       "@angular-eslint/directive-selector": [
         "error",
@@ -31,13 +44,20 @@ module.exports = tseslint.config(
         },
       ],
     },
+    linterOptions: {
+      reportUnusedDisableDirectives: true,
+    },
   },
+  // Configuration for HTML files
   {
     files: ["**/*.html"],
+    plugins: {
+      "@angular-eslint/template": angularTemplate,
+    },
     extends: [
-      ...angular.configs.templateRecommended,
-      ...angular.configs.templateAccessibility,
+      "plugin:@angular-eslint/template/recommended",
+      "plugin:@angular-eslint/template/accessibility",
     ],
     rules: {},
-  }
-);
+  },
+];
