@@ -1,3 +1,4 @@
+// eslint.config.js
 export default [
   {
     languageOptions: {
@@ -11,12 +12,10 @@ export default [
         es6: true,
       },
     },
-    ignores: [
-      "dist/", // Ignora todo el directorio 'dist'
-    ],
     rules: {
       "no-unused-vars": "warn",
       "no-console": "off",
     },
+    ignores: ["dist/**/*"], // Ignora todos los archivos en la carpeta dist
   },
 ];
