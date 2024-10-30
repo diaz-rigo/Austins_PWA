@@ -6,11 +6,14 @@ on:
       - main
       - release/*
       - development
+      - feature/*
+
   pull_request:
     branches:
       - main
       - release/*
       - development
+      - feature/*
   workflow_dispatch:
     # Para ejecutar manualmente
     inputs:
@@ -19,21 +22,31 @@ on:
         required: true
         default: staging
 
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
+  # 2. Usa el PAT_TOKEN para acceder a GitHub
+    env:
+      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}  # Sets custom GITHUB_TOKEN for all steps in the job
     steps:
       # 1. Checkout del código
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
+
+
+      # Aquí puedes agregar otros pasos de construcción, pruebas o despliegue...
 
       # 2. Configuración de Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18' # Cambiado de '16' a '18'
-
+          node-version: '18'
       # 3. Cache de dependencias npm
       - name: Cache npm dependencies
         uses: actions/cache@v2
@@ -46,7 +59,13 @@ jobs:
       # 4. Instalación de dependencias
       - name: Install dependencies
         run: npm install -f
-
+      # # 5. Ejecución de Linter
+      # - name: Run Linter
+      #   run: npm run lint -f
+        
+      # # 6. Ejecución de Prettier
+      # - name: Run Prettier
+      #   run: npx prettier --check .
       # 5. Compilación del proyecto
       - name: Build Austins PWA
         run: npm run build
@@ -57,32 +76,7 @@ jobs:
         with:
           name: build
           path: ./dist/austins
-
-      # Notificación de éxito (solo para pull request)
-      # # Notificación de éxito (solo para pull request)
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR
-      #       if (!pull_request || !pull_request.number) {
-      #         throw new Error('Missing pull request information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario utilizando el cliente REST proporcionado por la acción
-      #       await github.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Build and tests passed successfully!'
-      #       });
+          retention-days: 7  # Establece la retención en 7 días
 
 
 
@@ -94,7 +88,9 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      # 2. Configuración de Node.js
+
+
+    # 2. Configuración de Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -114,56 +110,51 @@ jobs:
         with:
           name: test-results
           path: ./coverage
+          retention-days: 7  # Establece la retención en 7 días
 
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
+
+      # 6. Comentar en Pull Request (si corresponde)
+      - name: Comment on Pull Request
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: actions/github-script@v4
+        with:
+          script: |
+            github.issues.createComment({
+              issue_number: ${{ github.event.pull_request.number }},
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "El pipeline ha completado su ejecución con estado: ${{ job.status }}."
+            })
+
+
+  e2e:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install -f
+
+      # - name: Run E2E tests with Cypress
+      #   run: npm run e2e
+
+      # # Opcional: subir reportes E2E
+      # - name: Upload E2E report
+      #   uses: actions/upload-artifact@v3
       #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
+      #     name: e2e-report
+      #     path: ./cypress/reports
 
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
 
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Unit tests passed successfully!'
-      #       });
-
-      #       - name: Post Failure Comment
-      #       if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-      #       uses: actions/github-script@v4
-      #       with:
-      #         script: |
-      #           // Obtenemos el contexto del pull request
-      #           const pull_request = context.payload.pull_request;
-
-      #           // Validamos que haya un número de PR, propietario y repositorio
-      #           if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #             throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #           }
-
-      #           const issue_number = pull_request.number;
-      #           const owner = context.repo.owner;
-      #           const repo = context.repo.repo;
-
-      #           await github.rest.issues.createComment({
-      #             owner,
-      #             repo,
-      #             issue_number,
-      #             body: '❌ Unit tests failed. Please review the logs.'
-      #           });
   Deploy-Preview:
-      needs: [Test] # Asegúrate de que hay un trabajo llamado Test
+      # needs: [Test] # Asegúrate de que hay un trabajo llamado Test
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v3
@@ -179,63 +170,24 @@ jobs:
 
         - name: Deploy Project Artifacts
           run: vercel deploy --prebuilt --yes --token=${{ secrets.VERCEL_TOKEN }}
+  notify-email:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    steps:
+      - name: Send Notification via Email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com  # Configura el servidor SMTP, en este caso se usa Gmail
+          server_port: 465                # Puerto de SMTP para conexiones SSL
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: "Pipeline Result: ${{ job.status }}"
+          body: |
+            El pipeline ha completado su ejecución.
 
-
-
-
-
-
-
-
-# Notificación de éxito en el despliegue (solo para pull requests)
-      # - name: Post Success Comment
-      #   if: github.event_name == 'pull_request' && success()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario de éxito
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '✅ Deployment to Vercel successful!'
-      #       });
-
-      # Notificación de fallo en el despliegue (solo para pull requests)
-      # - name: Post Failure Comment
-      #   if: github.event_name == 'pull_request' && failure()  # Solo ejecutar para pull_request
-      #   uses: actions/github-script@v4
-      #   with:
-      #     script: |
-      #       // Obtenemos el contexto del pull request
-      #       const pull_request = context.payload.pull_request;
-
-      #       // Validamos que haya un número de PR, propietario y repositorio
-      #       if (!pull_request || !context.repo || !context.repo.owner || !context.repo.repo) {
-      #         throw new Error('Missing required properties: pull request, owner, or repository information.');
-      #       }
-
-      #       const issue_number = pull_request.number;
-      #       const owner = context.repo.owner;
-      #       const repo = context.repo.repo;
-
-      #       // Crear el comentario de fallo
-      #       await github.rest.issues.createComment({
-      #         owner,
-      #         repo,
-      #         issue_number,
-      #         body: '❌ Deployment to Vercel failed. Please check the logs.'
-      #       });
-
+            Workflow: ${{ github.workflow }}
+            Job Status: ${{ job.status }}
+            Event: ${{ github.event_name }}
+            Repository: ${{ github.repository }}
+          to: ${{ secrets.NOTIFICATION_EMAIL }}
+          from: ${{ secrets.MAIL_USERNAME }}

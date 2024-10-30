@@ -1,0 +1,19 @@
+// .eslintrc.cjs
+
+export default {
+  root: true,
+  overrides: [
+    {
+      files: ["*.ts"],
+      parserOptions: {
+        project: ["tsconfig.json"]
+      },
+      extends: [
+        "plugin:@angular-eslint/recommended"
+      ],
+      linterOptions: {
+        reportUnusedDisableDirectives: true
+      }
+    }
+  ]
+};

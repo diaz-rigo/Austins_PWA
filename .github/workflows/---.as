@@ -7,15 +7,11 @@ on:
       - main
       - release/*
       - development
-      - feature/*
-
   pull_request:
     branches:
       - main
       - release/*
       - development
-      - feature/*
-
   workflow_dispatch:
     # Para ejecutar manualmente
     inputs:
@@ -23,10 +19,6 @@ on:
         description: Seleccionar entorno
         required: true
         default: staging
-permissions:
-  contents: write
-  pull-requests: write
-  issues: write
 
 jobs:
   build:
@@ -72,8 +64,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
     steps:
       # 1. Checkout del código
       - name: Checkout repository
@@ -99,19 +89,6 @@ jobs:
         with:
           name: test-results
           path: ./coverage
-          
-      # 6. Comentar en Pull Request (si corresponde)
-      - name: Comment on Pull Request
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: actions/github-script@v4
-        with:
-          script: |
-            github.issues.createComment({
-              issue_number: ${{ github.event.pull_request.number }},
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: "El pipeline ha completado su ejecución con estado: ${{ job.status }}."
-            })
 
 
   Deploy-Production:
@@ -130,26 +107,3 @@ jobs:
 
       - name: Deploy Project Artifacts
         run: vercel deploy --prebuilt --prod --yes --token=${{ secrets.VERCEL_TOKEN }}
-
-
-  notify-email:
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    steps:
-      - name: Send Notification via Email
-        uses: dawidd6/action-send-mail@v3
-        with:
-          server_address: smtp.gmail.com  # Configura el servidor SMTP, en este caso se usa Gmail
-          server_port: 465                # Puerto de SMTP para conexiones SSL
-          username: ${{ secrets.MAIL_USERNAME }}
-          password: ${{ secrets.MAIL_PASSWORD }}
-          subject: "Pipeline Result: ${{ job.status }}"
-          body: |
-            El pipeline ha completado su ejecución.
-
-            Workflow: ${{ github.workflow }}
-            Job Status: ${{ job.status }}
-            Event: ${{ github.event_name }}
-            Repository: ${{ github.repository }}
-          to: ${{ secrets.NOTIFICATION_EMAIL }}
-          from: ${{ secrets.MAIL_USERNAME }}
