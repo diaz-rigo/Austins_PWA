@@ -1,3 +1,4 @@
+
 # 🍰 Austins - Flutter E-commerce App for Bakery 🍰
 
 <div align="center" style="margin-bottom: 20px;">
@@ -7,75 +8,104 @@
 ---
 
 ### 📝 Project Overview
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.3. It serves as a foundation for a bakery e-commerce application developed with Flutter.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) versión **16.2.3** y sirve como base para una aplicación de comercio electrónico para una panadería desarrollada con Flutter.
 
 ---
 
-## 🚀 Development server
-Run the following command to start the development server:
+## 🚀 Getting Started
 
-\`\`\`bash
+### Prerequisites
+Antes de comenzar, asegúrate de tener instaladas las siguientes herramientas en tu máquina:
+
+- **Node.js** (versión 14 o superior) - [Descargar aquí](https://nodejs.org/)
+- **Angular CLI** - Para instalar Angular CLI, ejecuta el siguiente comando:
+
+    ```bash
+    npm install -g @angular/cli
+    ```
+
+### Clonar el Repositorio
+Clona el repositorio usando el siguiente comando:
+
+```bash
+git clone https://github.com/diaz-rigo/Austins_PWA.git
+```
+
+### Instalar Dependencias
+Navega al directorio del proyecto y ejecuta el siguiente comando para instalar las dependencias necesarias:
+
+```bash
+cd Austins_PWA
+npm install
+```
+
+---
+
+## 🚀 Development Server
+Para iniciar el servidor de desarrollo, ejecuta:
+
+```bash
 ng serve
-\`\`\`
+```
 
-Navigate to [http://localhost:4200/](http://localhost:4200/). The application will automatically reload if you make changes to the source files.
+Luego, abre tu navegador y navega a [http://localhost:4200/](http://localhost:4200/). La aplicación se recargará automáticamente si realizas cambios en los archivos fuente.
 
 ---
 
-## 🛠️ Code scaffolding
-Generate new components, directives, pipes, services, and more using the Angular CLI commands:
+## 🛠️ Code Scaffolding
+Genera nuevos componentes, directivas, pipes, servicios, y más utilizando los comandos de Angular CLI:
 
-\`\`\`bash
+```bash
 ng generate component component-name
-\`\`\`
+```
 
-You can also use:
+También puedes usar:
 
-\`\`\`bash
+```bash
 ng generate directive|pipe|service|class|guard|interface|enum|module
-\`\`\`
+```
 
 ---
 
 ## 📦 Build
-To build the project and generate the production files, use:
+Para construir el proyecto y generar los archivos de producción, utiliza:
 
-\`\`\`bash
+```bash
 ng build
-\`\`\`
+```
 
-The build artifacts will be stored in the \`dist/\` directory.
+Los artefactos de la construcción se almacenarán en el directorio `dist/`. 
 
 ---
 
-## ✅ Running unit tests
-Execute unit tests using [Karma](https://karma-runner.github.io):
+## ✅ Running Unit Tests
+Ejecuta pruebas unitarias usando [Karma](https://karma-runner.github.io):
 
-\`\`\`bash
+```bash
 ng test
-\`\`\`
+```
 
 ---
 
-## 🔍 Running end-to-end tests
-For end-to-end tests, run:
+## 🔍 Running End-to-End Tests
+Para ejecutar pruebas end-to-end, utiliza:
 
-\`\`\`bash
+```bash
 ng e2e
-\`\`\`
+```
 
-To use this command, you need to first add a package that implements end-to-end testing capabilities.
+**Nota:** Antes de usar este comando, asegúrate de agregar un paquete que implemente las capacidades de pruebas end-to-end.
 
 ---
 
-## 📚 Further help
-For more help on Angular CLI, use the following command:
+## 📚 Further Help
+Para más ayuda sobre Angular CLI, utiliza el siguiente comando:
 
-\`\`\`bash
+```bash
 ng help
-\`\`\`
+```
 
-Or check out the official [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+O visita la página oficial de [Angular CLI Overview and Command Reference](https://angular.io/cli).
 
 ---
 
