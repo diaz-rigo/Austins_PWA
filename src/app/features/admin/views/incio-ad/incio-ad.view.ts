@@ -56,7 +56,7 @@ export class InicioAdView implements OnInit, OnDestroy {
       this.pendingSales = data.ventasPendientes || 0;
       this.completedSales = data.ventasCompletadas || 0;
       this.ventasExpirados = data.ventasExpirados || 0;
-      console.log("ventas-----", data);
+      // console.log("ventas-----", data);
     });
 
     this.reportService.getEstadisticasPedidos().subscribe(data => {
@@ -64,7 +64,7 @@ export class InicioAdView implements OnInit, OnDestroy {
       this.pendingOrders = data.pedidosPendientes || 0;
       this.completedOrders = data.pedidosCompletados || 0;
       this.totalOrderAmount = data.totalAmount || 0;
-      console.log("pedidos-----", data);
+      // console.log("pedidos-----", data);
     });
 
     this.reportService.getEstadisticasUsuarios().subscribe(data => {
