@@ -1,5 +1,5 @@
 
-# 🍰 Austins - Flutter E-commerce App for Bakery 🍰
+# 🍰 Austins - ANGULAR E-commerce App for Bakery 🍰
 
 <div align="center" style="margin-bottom: 20px;">
     <img src="https://static.wixstatic.com/media/64de7c_4d76bd81efd44bb4a32757eadf78d898~mv2_d_1765_2028_s_2.png" alt="Logo de Austins" width="210"/> 
